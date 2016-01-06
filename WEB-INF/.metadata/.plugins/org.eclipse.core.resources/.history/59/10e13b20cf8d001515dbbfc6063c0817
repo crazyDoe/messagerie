@@ -1,0 +1,31 @@
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/servlet/Insert1")
+public class Insert1 extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException{
+	    
+		// Traitement bdd
+		
+		// Réponse du serveur 
+		PrintWriter out = res.getWriter();
+	    
+	    res.setContentType( "text/html" );
+	
+	    out.println("<html><body><h2>");
+	    out.println(req.getParameter("tno") + " --> " + req.getParameter("texte") + "inséré dans la table tutu");
+    	out.println("</h2></body></html> ");
+    	
+	    try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	    res.sendRedirect("insert1.html");
+	}
+}

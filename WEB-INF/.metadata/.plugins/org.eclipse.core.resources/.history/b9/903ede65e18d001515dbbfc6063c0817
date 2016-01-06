@@ -1,0 +1,41 @@
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/servlet/Insert2Treatment")
+public class Insert2Treatment extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException{
+		BDDTools tools = new BDDTools();
+		String table = req.getParameter("table");
+		
+		try {
+			String request = "insert into " + table + " values(";
+			
+			for(int i = 0; i < Integer.parseInt(req.getParameter("length")); i++){
+				String field = tools.getField(table, i+1);
+				String type = tools.getType(table, i+1);
+				
+				if(type.equalsIgnoreCase("text"))
+					request+="'" + req.getParameter(field) + "', ";
+				else
+					request+=req.getParameter(field) + ", ";
+			}
+				
+			request = request.substring(0, request.length()-2);
+			request += ")";
+			res.getWriter().println(request);
+			tools.doRequest(request);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//res.sendRedirect("../insert2.html");
+	}
+}

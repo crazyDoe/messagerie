@@ -1,0 +1,51 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/servlet/Insert2")
+public class Insert2 extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException{
+		String table = req.getParameter("table");
+		BDDTools tools = new BDDTools();		
+		PrintWriter out = res.getWriter();
+		int nbCol = 0;
+		
+		try {
+			nbCol = tools.getNbCol(table);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		out.println("<html><body>");
+		out.println("<h1> Insert 2 </h1>");
+		
+		out.println("--------" + table);
+		
+		if(table != null){
+			out.println("<form action=\"Insert2Treatment\" method=\"post\">");
+			for(int i = 0; i < nbCol; i++){
+				String field = "";
+				try {
+					field = tools.getField(table, i+1);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				out.println("<p> " + field + " : <input type=\"text\" name=\"" + field + "\"> </p>");
+			}
+			out.println("<p><input type=\"hidden\" name=\"table\" value=\"" + table + "\"></p>");
+			out.println("<p><input type=\"hidden\" name=\"length\" value=\"" + nbCol + "\"></p>");
+			out.println("<p><input type=\"submit\"></p>");
+			out.println("</body></html>");
+		}
+		else
+			out.println("Entrez une table");
+	}
+}
