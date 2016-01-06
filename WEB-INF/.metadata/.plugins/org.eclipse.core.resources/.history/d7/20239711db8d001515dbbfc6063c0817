@@ -1,0 +1,145 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class BDDTools {
+	private Connection con;
+	private PreparedStatement ps;
+	private Scanner sc;
+	
+	public BDDTools(){
+		con = getConnection();
+	}
+	
+	public String getField(String table, int pos){
+		String request = "select * from " + table;
+
+		ps = con.prepareStatement(request);
+		ResultSet rs = ps.executeQuery();
+		ResultSetMetaData rsmd = rs.getMetaData();
+		
+		for(int i = 1; i < rsmd.getColumnCount()+1; i++)
+			tmp += rsmd.getColumnName(i) + "\t" + rsmd.getColumnTypeName(i) + "\n";
+		return tmp;
+	}
+	
+	public int getNbLines(String table) throws SQLException{
+		String request = "select count(*) from " + table;
+		
+		ps = con.prepareStatement(request);
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		return rs.getInt(1);
+	}
+	
+	public int getNbCol(String table) throws SQLException{
+		String request = "select * from " + table;
+		
+		ps = con.prepareStatement(request);
+		ResultSet rs = ps.executeQuery();
+		ResultSetMetaData rsmd = rs.getMetaData();
+		
+		return rsmd.getColumnCount();
+	}
+	
+	public ArrayList<ArrayList<String>> getRequest(String request) throws SQLException{
+		ArrayList<ArrayList<String>> liste = new ArrayList<ArrayList<String>>();
+		
+		ps = con.prepareStatement(request);
+		ResultSet rs = ps.executeQuery();
+		ResultSetMetaData rsmd = rs.getMetaData();
+
+		for(int i = 0; i < rsmd.getColumnCount(); i++){
+			liste.add(new ArrayList<String>());
+			liste.get(i).add(rsmd.getColumnName(i+1));
+		}			
+		while(rs.next()){
+			for(int i = 0; i < rsmd.getColumnCount(); i++)
+				liste.get(i).add(rs.getString(i+1) + "\t");
+		}
+		return liste;
+	}
+	
+	public void doRequest(String request) throws SQLException{
+		ps = con.prepareStatement(request);
+		ps.executeUpdate();
+	} 
+	
+	public String getDescription(String table) throws SQLException{
+		String request = "select * from " + table;
+
+		ps = con.prepareStatement(request);
+		ResultSet rs = ps.executeQuery();
+		ResultSetMetaData rsmd = rs.getMetaData();
+		
+		String tmp = "Nombre de colonnes : " + rsmd.getColumnCount() + "\n";
+		
+		for(int i = 1; i < rsmd.getColumnCount()+1; i++)
+			tmp += rsmd.getColumnName(i) + "\t" + rsmd.getColumnTypeName(i) + "\n";
+		return tmp;
+	}
+	
+	public void close(){
+		try {
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void insertInteract(String table) throws SQLException{
+		sc = new Scanner(System.in);	
+
+		int nombre = getNbCol(table);
+		List<String> liste = new ArrayList<String>();
+		
+		for(int i = 1; i < nombre +1 ; i++){
+			System.out.print("Valeur " + i + " : ");
+			liste.add(sc.next());
+		}
+
+		String request = "insert into " + table + " values(";
+		
+		for(int i = 0; i < nombre; i++)
+			request += "?,";
+		
+		request = request.substring(0, request.length()-1) + ")";
+		ps = con.prepareStatement(request);
+		
+		for(int i = 0; i < nombre; i++){
+			if(liste.get(i).charAt(0) == '\'')
+				ps.setString(i+1, liste.get(i));
+			else
+				ps.setInt(i+1, Integer.parseInt(liste.get(i)));
+		}
+		
+		ps.executeUpdate();
+	}
+
+	public Connection getConnection(){
+		Connection c = null;
+	/*	Properties p = new Properties();
+	
+		try {
+			p.load(new FileInputStream("Properties"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} */
+						
+		try {
+			Class.forName("org.postgresql.Driver");
+			c = DriverManager.getConnection("jdbc:postgresql://psqlserv/da2i", "vergauwb", "moi");
+		} 
+		catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+}

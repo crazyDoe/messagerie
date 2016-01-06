@@ -1,0 +1,18 @@
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/servlet/Insert1")
+public class Insert1 extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException{
+	    
+		// Traitement bdd
+		
+		// Réponse du serveur     
+	    res.setContentType("text/html");
+	    res.sendRedirect("../insert1.html");
+	}
+}
