@@ -1,25 +1,20 @@
 // Servlet Test.java  de test de la configuration
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.WebServlet;
-import java.sql.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/servlet/Deconnect")
-public class Deconnect extends HttpServlet
-{
-  public void service( HttpServletRequest req, HttpServletResponse res ) 
-       throws ServletException, IOException
-  {
-   
-    HttpSession session = req.getSession();
-    session.invalidate();
-    res.sendRedirect("../login.jsp");
+public class Deconnect extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
-  }
+	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		session.invalidate();
+		res.sendRedirect("../login.jsp");
+	}
 }
