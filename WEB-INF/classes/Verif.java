@@ -22,24 +22,24 @@ public class Verif extends HttpServlet{
 		Connection con = null;
 		ResultSet rs;
 		HttpSession session = req.getSession();
-    
+
 		try {
 			con = tools.getConnect();
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM personne WHERE pseudo=? AND mdp = ?");
-			
+
 			String nomSaisi = req.getParameter("login");
-			
+
 			stmt.setString(1, nomSaisi);
 			stmt.setString(2, req.getParameter("mdp"));
 			rs = stmt.executeQuery();
-			
+
 			if(rs.next()){
 				session.setAttribute("pseudo", nomSaisi);
-				res.sendRedirect("../home.jsp");
+				res.sendRedirect("../index.jsp");
 			}
 			else{
 				session.setAttribute("erreur","Mauvais Identifiants");
-				res.sendRedirect("../index.jsp");
+				res.sendRedirect("../login.jsp");
 
 			}
 		} catch (Exception e) {
