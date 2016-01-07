@@ -12,3 +12,11 @@ body{
   background-color: #F8F8F8;
   height: 50px;
 }
+
+#gauche{
+	text-align: left;
+}
+
+#droite{
+	float: right;
+}

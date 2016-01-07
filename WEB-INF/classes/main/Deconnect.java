@@ -1,3 +1,4 @@
+package main;
 // Servlet Test.java  de test de la configuration
 import java.io.IOException;
 
