@@ -19,7 +19,7 @@ public class Verif extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
-		BDDTools tools = new BDDTools();
+		BDDTools tools = new BDDTools(req,res);
 		Connection con = null;
 		ResultSet rs;
 		HttpSession session = req.getSession();

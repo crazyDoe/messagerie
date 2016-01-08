@@ -19,7 +19,7 @@ public class SelectContacts extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
-		BDDTools tools = new BDDTools();
+		BDDTools tools = new BDDTools(req);
 		Connection con = null;
 		ResultSet rs;
 		PrintWriter out = res.getWriter();
@@ -30,7 +30,7 @@ public class SelectContacts extends HttpServlet{
 
 			stmt.setString(1, req.getParameter("pseudo"));
 			rs = stmt.executeQuery();
-			
+
 			while(rs.next())
 				out.println(rs.next());
 		} catch (Exception e) {
