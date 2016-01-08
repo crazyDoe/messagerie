@@ -1,10 +1,11 @@
 package main;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,17 +23,21 @@ public class SelectContacts extends HttpServlet{
 		BDDTools tools = new BDDTools();
 		Connection con = null;
 		ResultSet rs;
-		PrintWriter out = res.getWriter();
 
 		try {
 			con = tools.getConnect();
-			PreparedStatement stmt = con.prepareStatement("SELECT pseudo FROM personne where pseudo = ?");
+			PreparedStatement stmt = con.prepareStatement("SELECT pseudo FROM personne join contact on where pseudo = ?");
 
 			stmt.setString(1, req.getParameter("pseudo"));
 			rs = stmt.executeQuery();
 			
+			List<String> liste = new LinkedList<String>();
+			
 			while(rs.next())
-				out.println(rs.next());
+				liste.add(rs.getString("pseudo"));
+			req.getSession().setAttribute("contacts", liste);
+			res.getWriter().println(liste);
+			//res.sendRedirect(req.getContextPath() + "/profil.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
