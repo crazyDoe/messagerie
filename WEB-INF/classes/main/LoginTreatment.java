@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import outils.BDDTools;
 
-@WebServlet("/servlet/Verif")
-public class Verif extends HttpServlet{
+@WebServlet("/servlet/LoginTreatment")
+public class LoginTreatment extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
@@ -35,12 +37,23 @@ public class Verif extends HttpServlet{
 			rs = stmt.executeQuery();
 
 			if(rs.next()){
+				stmt = con.prepareStatement("SELECT pseudo_reception FROM contact where pseudo_ajout = ?");
+
+				stmt.setString(1, nomSaisi);
+				rs = stmt.executeQuery();
+				
+				List<String> liste = new LinkedList<String>();
+
+				while(rs.next())
+					liste.add(rs.getString("pseudo_reception"));
+				req.getSession().setAttribute("contacts", liste);
+				
 				session.setAttribute("pseudo", nomSaisi);
-				res.sendRedirect("../profil.jsp");
+				res.sendRedirect(req.getContextPath() + "/profil.jsp");
 			}
 			else{
 				session.setAttribute("erreur","Mauvais Identifiants");
-				res.sendRedirect("../login.jsp");
+				res.sendRedirect(req.getContextPath() + "/login.jsp");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
