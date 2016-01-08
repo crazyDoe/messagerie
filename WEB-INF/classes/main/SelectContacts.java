@@ -20,7 +20,7 @@ public class SelectContacts extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
-		BDDTools tools = new BDDTools();
+		BDDTools tools = new BDDTools(req, res);
 		Connection con = null;
 		ResultSet rs;
 
@@ -32,7 +32,7 @@ public class SelectContacts extends HttpServlet{
 			rs = stmt.executeQuery();
 			
 			List<String> liste = new LinkedList<String>();
-			
+
 			while(rs.next())
 				liste.add(rs.getString("pseudo"));
 			req.getSession().setAttribute("contacts", liste);
