@@ -10,10 +10,10 @@
        </div>
      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
       <ul class="nav navbar-nav" style="float : right">
-        <li class="active"> <a href="#"><i class="fa fa-user"></i></a></li>
+        <li class="active"> <a href="addContact.jsp"><i class="fa fa-user"></i>+</a></li>
         <li class="active"> <a href="#"><i class="fa fa-envelope"></i></a></li>
         <li class="active"> <a href="#"><i class="fa fa-bell"></i></a></li>
-        <li class="active"> <a href="servlet/Deconnect"><i class="fa-power-off"></i></a></li>
+        <li class="active"> <a href="servlet/Deconnect"><i class="fa fa-power-off"></i></a></li>
       </ul>
       </div>
     </div>
