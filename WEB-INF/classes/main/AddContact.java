@@ -42,6 +42,7 @@ public class AddContact extends HttpServlet{
 				stmt.setString(1, nomCourant);
 				stmt.setString(2, nomSaisi);
 				stmt.executeUpdate();
+				session.setAttribute("erreur",null);
 				res.sendRedirect("SelectContact");
 			}
 			else

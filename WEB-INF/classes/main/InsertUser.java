@@ -29,13 +29,20 @@ public class InsertUser extends HttpServlet{
 			con = tools.getConnect();
 			String nomSaisi = req.getParameter("pseudo");
 			String mdp = req.getParameter("mdp");
-			session.setAttribute("pseudo", nomSaisi);
-			PreparedStatement stmt = con.prepareStatement("INSERT INTO personne VALUES (?,?)");
-			stmt.setString(1, nomSaisi);
-			stmt.setString(2, mdp);
-			stmt.executeUpdate();
-			res.sendRedirect(req.getContextPath() + "/login.jsp");
-			con.close();
+			String mdp2 = req.getParameter("mdp2");
+			if(mdp.equals(mdp2))
+			{
+				session.setAttribute("pseudo", nomSaisi);
+				PreparedStatement stmt = con.prepareStatement("INSERT INTO personne VALUES (?,?)");
+				stmt.setString(1, nomSaisi);
+				stmt.setString(2, mdp);
+				stmt.executeUpdate();
+			}
+			else
+			{
+				session.setAttribute("erreur","Mots de passe non identiques");
+			}
+				res.sendRedirect(req.getContextPath() + "/login.jsp");
 
 		} catch (Exception e) {
 			out.println(e);
