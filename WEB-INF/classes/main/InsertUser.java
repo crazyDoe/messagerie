@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,11 +16,11 @@ import outils.BDDTools;
 
 @WebServlet("/servlet/InsertUser")
 public class InsertUser extends HttpServlet{
+	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
 		BDDTools tools = new BDDTools(req,res);
 		Connection con = null;
-		ResultSet rs;
 		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
 
