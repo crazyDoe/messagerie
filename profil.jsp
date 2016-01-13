@@ -20,9 +20,13 @@
 		      <%
 			       List<String> contacts = (List<String>)session.getAttribute("contacts");
 			       if(contacts != null){
-			       for(String s : contacts)
-				      out.println(s + "<br />");
-			       }
+			        for(String s : contacts){
+                if (new File(request.getServletContext().getRealPath("/") + "img/" + s + "Avatar.png").exists())
+                  out.println(s + " <img id='petitAvatar' src='img/" + s + "Avatar.png'><br />");
+                else
+                  out.println(s + " <img id='petitAvatar' src='img/defaultAvatar.png'><br />");
+              }
+            }
 		      %>
 		    </h4>
 
@@ -34,7 +38,8 @@
           <form method="POST" action="servlet/UploadImage" enctype="multipart/form-data"  >
             <div class="form-group">
               <%
-                if (!new File("img/" + request.getSession().getAttribute("pseudo") + "Avatar.png").exists()){ %>
+                if (new File(request.getServletContext().getRealPath("/") + 
+                  "img/" + pseudo + "Avatar.png").exists()){ %>
                   <img id="avatar" src="img/${sessionScope.pseudo}Avatar.png">
               <% } else{ %>
                   <img id="avatar" src="img/defaultAvatar.png">

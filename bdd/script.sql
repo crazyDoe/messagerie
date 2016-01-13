@@ -47,18 +47,12 @@ create table contient(
 	constraint fk_contient2 foreign key(pseudo_personne) references personne(pseudo)
 );
 
-
 INSERT INTO personne VALUES ('biche','123456');
 INSERT INTO personne VALUES ('zepellin','123123');
+INSERT INTO personne VALUES ('admin','admin');
 INSERT INTO personne VALUES ('thor','jamesbond');
 INSERT INTO personne VALUES ('bryan','123456');
 INSERT INTO personne VALUES ('bob','marteau');
-
-INSERT INTO contact VALUES ('biche','bryan');
-INSERT INTO contact VALUES('biche','thor');
-INSERT INTO contact VALUES('biche','bob');
-INSERT INTO contact VALUES('thor','bob');
-INSERT INTO contact VALUES('bryan','bob');
 
 INSERT INTO groupe (nom) VALUES('test');
 INSERT INTO groupe (nom) VALUES('concert');

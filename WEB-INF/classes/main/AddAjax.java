@@ -5,17 +5,18 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.LinkedList;
-import java.util.List;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import outils.BDDTools;
 
-@WebServlet("/servlet/Add")
-public class Add extends HttpServlet{
+@WebServlet("/servlet/AddAjax")
+public class AddAjax extends HttpServlet{
+	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
 		BDDTools tools = new BDDTools(req,res);

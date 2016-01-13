@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,9 +23,8 @@ public class LoginTreatment extends HttpServlet{
 		Connection con = null;
 		ResultSet rs;
 		HttpSession session = req.getSession();
-
+		
 		try {
-
 			con = tools.getConnect();
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM personne WHERE pseudo=? AND mdp = ?");
 			String nomSaisi = req.getParameter("login");

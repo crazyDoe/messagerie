@@ -20,7 +20,7 @@
      $('#nom').keyup(function() {
         $.ajax({
            type: "GET",
-           url: "servlet/Add?name="+$("#nom").val(),
+           url: "servlet/AddAjax?name="+$("#nom").val(),
            success: function(details)
            {
               $('#titre').text(details);
