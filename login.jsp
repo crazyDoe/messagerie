@@ -14,6 +14,10 @@
 						<div class="panel-heading">
 							<h1> Quoi d'neuf ?</h1>
 							<br />
+							<% if (session.getAttribute("erreur")!=null) { %>
+                  <h4 style="color:red"> Erreur : ${sessionScope.erreur}</h4>
+                <%  session.setAttribute("erreur",null);
+               }%>
 							<h3 class="panel-title">Restez en contact avec vos amis partout dans le monde !!!!</h3>
 						</div>
 						<div class="panel-body">
