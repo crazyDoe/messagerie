@@ -33,7 +33,7 @@ public class InsertUser extends HttpServlet{
 			stmt.setString(2, mdp);
 			stmt.setString(3, "noImg");
 			stmt.executeUpdate();
-			res.sendRedirect(req.getContextPath() + "/profil.jsp");
+			res.sendRedirect(req.getContextPath() + "/login.jsp");
 			con.close();
 
 		} catch (Exception e) {
