@@ -24,3 +24,13 @@ body{
 #droite{
 	float: right;
 }
+
+#avatar{
+	width: 200px;
+	height: 200px;
+}
+
+#petitAvatar{
+	width: 30px;
+	height: 30px;
+}

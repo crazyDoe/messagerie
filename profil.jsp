@@ -1,4 +1,4 @@
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List, java.io.File" %>
 
 <!DOCTYPE html>
 <html>
@@ -20,9 +20,13 @@
 		      <%
 			       List<String> contacts = (List<String>)session.getAttribute("contacts");
 			       if(contacts != null){
-			       for(String s : contacts)
-				      out.println(s + "<br />");
-			       }
+			        for(String s : contacts){
+                if (new File(request.getServletContext().getRealPath("/") + "img/" + s + "Avatar.png").exists())
+                  out.println(s + " <img id='petitAvatar' src='img/" + s + "Avatar.png'><br />");
+                else
+                  out.println(s + " <img id='petitAvatar' src='img/defaultAvatar.png'><br />");
+              }
+            }
 		      %>
 		    </h4>
 
@@ -31,9 +35,15 @@
       <h2> Bievenue <%= pseudo %></h2>
 
         <div id="col-md-4">
-          <form method="POST" action="servlet/Upload" enctype="multipart/form-data"  >
+          <form method="POST" action="servlet/UploadImage" enctype="multipart/form-data"  >
             <div class="form-group">
-              <img src="img/avatar.png">
+              <%
+                if (new File(request.getServletContext().getRealPath("/") + 
+                  "img/" + pseudo + "Avatar.png").exists()){ %>
+                  <img id="avatar" src="img/${sessionScope.pseudo}Avatar.png">
+              <% } else{ %>
+                  <img id="avatar" src="img/defaultAvatar.png">
+              <% } %>
             </div>
             <div class="form-group">
               <label>File Input </label>
