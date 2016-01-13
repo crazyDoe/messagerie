@@ -36,12 +36,14 @@ public class InsertUser extends HttpServlet{
 				stmt.setString(1, nomSaisi);
 				stmt.setString(2, mdp);
 				stmt.executeUpdate();
+				session.setAttribute("erreur",null);
+				res.sendRedirect(req.getContextPath() + "/login.jsp");
 			}
 			else
 			{
 				session.setAttribute("erreur","Mots de passe non identiques");
+				res.sendRedirect(req.getContextPath() + "/addUser.jsp");
 			}
-				res.sendRedirect(req.getContextPath() + "/login.jsp");
 
 		} catch (Exception e) {
 			out.println(e);
