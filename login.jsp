@@ -2,6 +2,10 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="css/bootstrap.css">
+		<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+
 		<meta charset="utf-8">
 		<title >Home </title>
 	</head>
