@@ -11,26 +11,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-@WebServlet("/servlet/Upload")
+@WebServlet("/servlet/UploadImage")
 @MultipartConfig
-public class Upload extends HttpServlet{
+public class UploadImage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("resource")
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException{
-		HttpSession session = req.getSession();
-		
-		final String path = req.getServletContext().getRealPath("/") + "/users/" + session.getAttribute("login");
+		final String path = req.getServletContext().getRealPath("/") + "img/" + req.getSession().getAttribute("pseudo") + "Avatar.png";
 		final Part filePart = req.getPart("file");
-	    final String fileName = getFileName(filePart);
-
+	    
 	    OutputStream out = null;
 	    InputStream filecontent = null;
 	    
-	    File f = new File(path + File.separator + fileName);
-	    out = new FileOutputStream(f);
+	    out = new FileOutputStream(new File(path));
 	    filecontent = filePart.getInputStream();
 	    
 	    int read = 0;
@@ -40,14 +36,5 @@ public class Upload extends HttpServlet{
 	    	out.write(bytes, 0, read);
 	    
 	    res.sendRedirect("../profil.jsp");
-	}
-
-	private String getFileName(final Part part) {
-	    for (String content : part.getHeader("content-disposition").split(";")) {
-	        if (content.trim().startsWith("filename")) {
-	            return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-	        }
-	    }
-	    return null;
 	}
 }
