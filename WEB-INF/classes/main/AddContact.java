@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import outils.BDDTools;
 
-@WebServlet("/servlet/addContact")
-public class addContact extends HttpServlet{
+@WebServlet("/servlet/AddContact")
+public class AddContact extends HttpServlet{
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
 		BDDTools tools = new BDDTools(req,res);
@@ -27,19 +27,19 @@ public class addContact extends HttpServlet{
 			con = tools.getConnect();
 			String nomSaisi = req.getParameter("pseudo");
 			String nomCourant = ""+session.getAttribute("pseudo");
-			PreparedStatement stmta = con.prepareStatement("SELECT * FROM personne WHERE pseudo= ?");
-			stmta.setString(1, nomSaisi);
-			rs = stmta.executeQuery();
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM personne WHERE pseudo= ?");
+			stmt.setString(1, nomSaisi);
+			rs = stmt.executeQuery();
 			if(rs.next())
 			{
-				Statement stmt = con.createStatement();
 				List<String> liste = (List<String>)session.getAttribute("contacts");
 				liste.add(nomSaisi);
 				req.getSession().setAttribute("contacts", liste);
-
-				String requete = "INSERT INTO contact VALUES('"+nomCourant+"','"+nomSaisi+"');";
-				stmt.executeUpdate(requete);
-				res.sendRedirect(req.getContextPath() + "/profil.jsp");
+				stmt = con.prepareStatement("INSERT INTO contact VALUES(?,?)");
+				stmt.setString(1, nomCourant);
+				stmt.setString(2, nomSaisi);
+				stmt.executeUpdate();
+				res.sendRedirect("SelectContact");
 			}
 			else
 			{

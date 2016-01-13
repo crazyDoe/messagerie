@@ -16,8 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import outils.BDDTools;
 
-@WebServlet("/servlet/LoginTreatment")
-public class LoginTreatment extends HttpServlet{
+@WebServlet("/servlet/SelectContact")
+public class SelectContact extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
@@ -27,22 +27,27 @@ public class LoginTreatment extends HttpServlet{
 		HttpSession session = req.getSession();
 
 		try {
-
-			con = tools.getConnect();
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM personne WHERE pseudo=? AND mdp = ?");
-			String nomSaisi = req.getParameter("login");
+		con = tools.getConnect();
+			List<String> liste = new LinkedList<String>();
+      String nomSaisi = (String)session.getAttribute("pseudo");
+			// select a vers b
+			PreparedStatement stmt = con.prepareStatement("SELECT pseudo_reception FROM contact where pseudo_ajout = ?");
 			stmt.setString(1, nomSaisi);
-			stmt.setString(2, req.getParameter("mdp"));
 			rs = stmt.executeQuery();
-			if(rs.next())
-			{
-				session.setAttribute("pseudo", nomSaisi);
-				res.sendRedirect("SelectContact");
-			}
-			else{
-				session.setAttribute("erreur","Mauvais Identifiants");
-				res.sendRedirect(req.getContextPath() + "/login.jsp");
-			}
+
+			while(rs.next())
+				liste.add(rs.getString("pseudo_reception"));
+
+				// select b vers a
+				stmt = con.prepareStatement("SELECT pseudo_ajout FROM contact where pseudo_reception = ?");
+				stmt.setString(1, nomSaisi);
+				rs = stmt.executeQuery();
+
+				while(rs.next())
+					liste.add(rs.getString("pseudo_ajout"));
+			req.getSession().setAttribute("contacts", liste);
+			session.setAttribute("pseudo", nomSaisi);
+			res.sendRedirect(req.getContextPath() + "/profil.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

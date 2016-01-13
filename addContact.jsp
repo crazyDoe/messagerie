@@ -8,9 +8,9 @@
   <body>
     <%@ include file="header.jsp"%>
     <h2> Recherche nom </h2>
-    <form action="servlet/addContact" method="POST">
+    <form action="servlet/AddContact" method="POST">
       Nom : <input type="text" id="nom" name="pseudo"><BR>
-      <textarea id="titre"></textarea>
+      <textarea id="titre" style="height:200px"></textarea>
       <input type='submit' value="Valider">
     </form>
   </body>
@@ -20,7 +20,7 @@
      $('#nom').keyup(function() {
         $.ajax({
            type: "GET",
-           url: "servlet/add?name="+$("#nom").val(),
+           url: "servlet/Add?name="+$("#nom").val(),
            success: function(details)
            {
               $('#titre').text(details);

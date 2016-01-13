@@ -31,9 +31,8 @@ public class BDDTools {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection("jdbc:sqlite:../webapps/messagerie/bdd/messagerie.db");
-			res.getWriter().println(con);
 		}
-		catch (ClassNotFoundException | SQLException | IOException e ) {
+		catch (ClassNotFoundException | SQLException e ) {
 			e.printStackTrace();
 		}
 	}

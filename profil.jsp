@@ -8,7 +8,7 @@
   </head>
   <body>
     <% Object pseudo = session.getAttribute("pseudo");
-    
+
     if(pseudo == null)
       response.sendRedirect("login.jsp"); %>
 
@@ -27,17 +27,17 @@
 		    </h4>
 
       </div>
-      
+
       <h2> Bievenue <%= pseudo %></h2>
-      
+
         <div id="col-md-4">
           <form method="POST" action="servlet/Upload" enctype="multipart/form-data"  >
             <div class="form-group">
-              <img src="img/avatar.png"> 
+              <img src="img/avatar.png">
             </div>
             <div class="form-group">
               <label>File Input </label>
-              <input type="file" name="file" id="file" /> 
+              <input type="file" name="file" id="file" />
             </div>
             <input type="submit" value="Upload" name="upload" class="btn btn-primary btn-lg">
           </form>
