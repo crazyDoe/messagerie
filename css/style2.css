@@ -1,11 +1,11 @@
 #main-wrapper{
   margin: auto;
   width: 1000px;
-  background: #f5f5f5 ;
+  background: #B09F91 ;
 }
 
 body{
-  background : rgb(140,30,93);
+  background : #5EB6DD;
 }
 
 #headerM{
@@ -46,7 +46,7 @@ body{
   padding: 0px;
 }
 #menu1{
-  height: 500px;
+  height: 900px;
 }
 
 .contact{

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="css/bootstrap.css">
+		<%@ include file="head.html"%>
 		<meta charset="utf-8">
 		<title >Home </title>
 	</head>
