@@ -12,56 +12,33 @@
        Object friend = request.getParameter("friend");
 
     session.setAttribute("friend", friend);
-    
+
     if(friend == null)
       response.sendRedirect("login.jsp"); %>
     <%@ include file="header.jsp" %>
-
-    <div class="row" id="menu1">
-
-
+    <div class="row recu">
       <div class="col-md-10">
-          
-            
-          <div class="col-md-9">
-            <br /><br /><br />
-            <TEXTAREA NAME="messages" ROWS=15 COLS=65>
-            </TEXTAREA>
-          </div>
-
-          <div class="col-md-3">
-            <h2> <%= pseudo %></h2>
-            <% if (new File(request.getServletContext().getRealPath("/") + "img/" + pseudo + "Avatar.png").exists()){ %>
-                  <img class="moyenAvatar" src="img/${sessionScope.pseudo}Avatar.png">
-            <% } else{ %>
-             <img class="moyenAvatar" src="img/defaultAvatar.png">
-            <% } %>
-          </div>
-          
-        <br /><br /><br /><br />
-            
-          <div class="col-md-9">
-           <br /><br /><br /><br /><br />
-           <TEXTAREA NAME="newMessage" ROWS=3 COLS=65>
-           </TEXTAREA>
-          </div>
-
-          <div class="col-md-3">
-            <h2> <%= friend %></h2>
-            <% if (new File(request.getServletContext().getRealPath("/") + "img/" + friend + "Avatar.png").exists()){ %>
-              <img class="moyenAvatar" src="img/${sessionScope.friend}Avatar.png">
-            <% } else{ %>
-            <img class="moyenAvatar" src="img/defaultAvatar.png">
-            <% } %>
-          </div>
-          
-        <br /><br />
-        
-      </div>
+          <% if (new File(request.getServletContext().getRealPath("/") + "img/" + pseudo + "Avatar.png").exists()){ %>
+                <img class="moyenAvatar discu-avatar" src="img/${sessionScope.pseudo}Avatar.png">
+          <% } else{ %>
+           <img class="moyenAvatar discu-avatar" src="img/defaultAvatar.png">
+          <% } %>
+          <div class="text-recu" NAME="newMessage"></div>
+    </div>
       <%@ include file="listeContacts.jsp" %>
     </div>
-
-    </div> <!-- Fin de row -->
+    <div class="row recu">
+      <div class="col-md-10">
+        <h2></h2>
+        <% if (new File(request.getServletContext().getRealPath("/") + "img/" + friend + "Avatar.png").exists()){ %>
+          <img class="moyenAvatar discu-avatar" src="img/${sessionScope.friend}Avatar.png">
+        <% } else{ %>
+        <img class="moyenAvatar discu-avatar" src="img/defaultAvatar.png">
+        <% } %>
+          <TEXTAREA class="text-envoi"NAME="newMessage" ROWS=5 COLS=80> <%= pseudo  %> dit :
+           </TEXTAREA>
+    </div>
+  </div>
     <%@ include file="footer.html"%>
   </body>
 </html>

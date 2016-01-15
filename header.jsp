@@ -11,7 +11,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-envelope"></i></a>
             <ul class="dropdown-menu dropdown-user">
-              <li> <a href=""> <i class="fa fa-pencil"></i> Nouveau Message </a></li>
+              <li> <a href="chat.jsp"> <i class="fa fa-pencil"></i> Nouveau Message </a></li>
               <li class="divider"></li>
               <li> <a href="voirMessage.jsp"> <i class="fa fa-comments"></i> Voir Messages  </a> </li>
             </ul>

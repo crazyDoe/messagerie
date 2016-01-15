@@ -1,6 +1,6 @@
 #main-wrapper{
   margin: auto;
-  width: 1000px;
+  width: 1200px;
   background: #B09F91 ;
 }
 
@@ -16,6 +16,7 @@ body{
 #container{
 	margin: 0 15px 0;
   margin-right: 0px;
+    height: 100%;
 }
 .navbar{
   margin-bottom: 0px;
@@ -65,7 +66,8 @@ body{
 .messages{
   margin-top: 30px;
   height: 550px;
-  width: 800px;
+  width: 900px;
+  margin-left: 40px;
   background-color: #f5f5d5;
   overflow: scroll;
 }
@@ -94,8 +96,7 @@ body{
   vertical-align: bottom;
   font-size: 15px;
 }
-
-.messages a:hover .mess{
+messages a:hover .mess{
     background: rgba(0,0,0,.2);
 }
 
@@ -105,4 +106,33 @@ body{
 
 .messages a .mess{
     color : black;
+}
+
+.recu{
+  margin: 20px;
+}
+
+.discu-avatar{
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 30px;
+  border-radius: 20px;
+}
+
+.text-recu {
+  display: inline-block;
+}
+
+.text-recu {
+  display: inline-block;
+}
+.text-recu {
+  display: inline-block;
+  overflow: scroll;
+  height: 400px;
+  width: 670px;
+  background-color: white;
+}
+.text-envoi {
+  display: inline-block;
 }
