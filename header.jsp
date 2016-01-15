@@ -13,7 +13,7 @@
             <ul class="dropdown-menu dropdown-user">
               <li> <a href=""> <i class="fa fa-pencil"></i> Nouveau Message </a></li>
               <li class="divider"></li>
-              <li> <a href=""> <i class="fa fa-comments"></i> Voir Messages  </a> </li>
+              <li> <a href="voirMessage.jsp"> <i class="fa fa-comments"></i> Voir Messages  </a> </li>
             </ul>
           </li>
           <li class="dropdown"> <a href="#"><i class="fa fa-bell"></i></a></li>
