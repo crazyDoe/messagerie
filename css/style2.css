@@ -61,3 +61,48 @@ body{
 .maListe{
   border-bottom: 1px solid black;
 }
+
+.messages{
+  margin-top: 30px;
+  height: 550px;
+  width: 800px;
+  background-color: #f5f5d5;
+  overflow: scroll;
+}
+
+.mess{
+  height: 80px;
+  border-bottom: 1px solid black;
+
+}
+
+.avatar-message{
+  height: 70px;
+  width: 70px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.pseudo-message{
+  display: inline-block;
+  vertical-align: top;
+  font-weight: bold;
+}
+
+.text-message{
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 15px;
+}
+
+.messages a:hover .mess{
+    background: rgba(0,0,0,.2);
+}
+
+.messages a .mess p{
+    color : grey;
+}
+
+.messages a .mess{
+    color : black;
+}
