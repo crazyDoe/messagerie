@@ -7,26 +7,42 @@
   </head>
   <body>
     <%@ include file="header.jsp"%>
-    <h2> Recherche nom </h2>
-    <form action="servlet/AddContact" method="POST">
-      Nom : <input type="text" id="nom" name="pseudo"><BR>
-      <textarea id="titre" style="height:200px"></textarea>
-      <input type='submit' value="Valider">
-    </form>
+    <h2> Liste des personnes </h2>
+    Nom : <input type="text" id="nom" name="pseudo"><BR>
+    <div id="liste" style="height:200px"></div>
   </body>
   <%@ include file="footer.html"%>
   <script>
-  $(function() {
-     $('#nom').keyup(function() {
+	$('#nom').ready(function(){
+		ajax();
+	});
+	$('#nom').keyup(function(){
+		ajax();
+	});
+	
+  	function ajax() {
         $.ajax({
            type: "GET",
            url: "servlet/AddAjax?name="+$("#nom").val(),
-           success: function(details)
-           {
-              $('#titre').text(details);
+           success: function(details){
+				$('#liste').text("");
+				var tab = details.split("\n");
+				var i;
+				$('#liste').append('<br />');
+				for (i = 0; i < tab.length-1; i++){
+					$('#liste').append("<a style='color: black' href='servlet/AddContact?nomSaisi=" + tab[i] + "'>" + tab[i] + "</a>");
+					
+					var img = new Image();
+					var url = "img/" + tab[i] + "Avatar.png";
+					img.src = url;
+					if (img.height != 0) // Si l'image n'existe pas
+						$('#liste').append("<img class='petitAvatar discu-avatar' src='img/" + tab[i] + "Avatar.png'>");
+					else
+						$('#liste').append("<img class='petitAvatar discu-avatar' src='img/defaultAvatar.png'>");
+				}
            }
         });
-     });
-  });
+    }
+  
   </script>
 </html>

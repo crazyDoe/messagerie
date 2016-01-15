@@ -26,7 +26,6 @@
             <% } %>
           </div>
           <div class="form-group">
-            <label>File Input </label>
             <input type="file" name="file" id="file" />
           </div>
           <input type="submit" value="Upload" name="upload" class="btn btn-primary btn-lg">
