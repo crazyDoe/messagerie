@@ -25,6 +25,11 @@ body{
 	height: 200px;
 }
 
+.moyenAvatar{
+  width: 130;
+  height: 130px;
+}
+
 .petitAvatar{
 	width: 30px;
 	height: 30px;

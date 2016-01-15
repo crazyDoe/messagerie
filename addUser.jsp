@@ -14,10 +14,10 @@
 						<div class="panel-heading">
 							<h1> Inscription</h1>
 							<br />
-              <% if (session.getAttribute("erreur")!=null) { %>
-                <h4 style="color:red"> Erreur :  ${sessionScope.erreur} </h4>
-                <%  session.setAttribute("erreur",null);
-               }%>
+              				<% if (session.getAttribute("erreur")!=null) { %>
+                				<h4 style="color:red"> Erreur :  ${sessionScope.erreur} </h4>
+                					<%  session.setAttribute("erreur",null);
+               				}%>
 							<h3 class="panel-title">Entrez vos informations</h3>
 						</div>
 						<div class="panel-body">
@@ -29,7 +29,7 @@
 								<div class="form-group">
 									<input class="form-control" placeholder="Password" name="mdp" value="" type="password">
 								</div>
-                <div class="form-group">
+                				<div class="form-group">
 									<input class="form-control" placeholder="Verif Password" name="mdp2" value="" type="password">
 								</div>
 								<input type='submit' value='Valider' class='btn btn-lg btn-success btn-block'>
