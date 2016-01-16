@@ -21,7 +21,7 @@ create table contact(
 );
 
 create table groupe(
-	gno serial,
+	gno integer,
 	nom text,
 
 	constraint pk_groupe primary key(gno)
