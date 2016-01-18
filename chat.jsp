@@ -57,13 +57,9 @@
            type: "GET",
            url: "servlet/AddMessage?message="+$("#newMessage").val(),
            success: function(details){
-<<<<<<< HEAD
-		      }
-=======
-             document.getElementById("recu").value=$("#newMessage").val();
+            document.getElementById("recu").value=$("#newMessage").val();
             document.getElementById("newMessage").value='';
-		   }
->>>>>>> 8ce3267f2ce5b23e42844c5a3f5815827cea5ce4
+		      }
         });
     }
   </script>
