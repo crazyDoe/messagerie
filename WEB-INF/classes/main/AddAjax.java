@@ -1,5 +1,4 @@
 package main;
-// Servlet Test.java  de test de la configuration
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -33,7 +32,7 @@ public class AddAjax extends HttpServlet{
 			PreparedStatement stmt = con.prepareStatement("select pseudo FROM personne"
 					+ " WHERE pseudo <> ?"
 					+ " AND pseudo LIKE ?"); 
-			// Ajouter test sur amis déjà présents dans les contacts
+			// Ajouter test sur amis dï¿½jï¿½ prï¿½sents dans les contacts
 			
 			stmt.setString(1, pseudo);
 			stmt.setString(2, req.getParameter("name")+"%");

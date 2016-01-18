@@ -28,7 +28,7 @@
       <%@ include file="listeContacts.jsp" %>
     </div>
     <div class="row recu">
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 		  <% if (new File(request.getServletContext().getRealPath("/") + "img/" + pseudo + "Avatar.png").exists()){ %>
                 <img class="moyenAvatar discu-avatar" src="img/${sessionScope.pseudo}Avatar.png">
           <% } else{ %>
@@ -57,7 +57,7 @@
            type: "GET",
            url: "servlet/AddMessage?message="+$("#newMessage").val(),
            success: function(details){
-		   }
+		      }
         });
     }
   </script>
