@@ -23,12 +23,12 @@
         <% } else{ %>
 			<img class="moyenAvatar discu-avatar" src="img/defaultAvatar.png">
         <% } %>
-        <div class="text-recu" ></div>
+        <div class="text-recu" id="recu" ></div>
     </div>
       <%@ include file="listeContacts.jsp" %>
     </div>
     <div class="row recu">
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 		  <% if (new File(request.getServletContext().getRealPath("/") + "img/" + pseudo + "Avatar.png").exists()){ %>
                 <img class="moyenAvatar discu-avatar" src="img/${sessionScope.pseudo}Avatar.png">
           <% } else{ %>
@@ -36,27 +36,29 @@
           <% } %>
           <TEXTAREA id="newMessage" class="text-envoi" ROWS=5 COLS=80></TEXTAREA>
 	  </div>
-	  <div class="col-md-2">	  
+	  <div class="col-md-2">
 		<input id="envoyer" type='submit' value='Envoyer' class='btn btn-lg btn-success btn-block'>
-	  </div>  
+	  </div>
 	</div>
     <%@ include file="footer.html"%>
   </body>
-  
+
   <script>
 	$('#envoyer').click(function(){
 		ajax();
 	});
 	$('#newMessage').keyup(function(e){
-		if(e.keyCode == 13) // Touche entrée
+		if(e.keyCode == 13) // Touche entrï¿½e
 			ajax();
 	});
-	
+
   	function ajax() {
         $.ajax({
            type: "GET",
            url: "servlet/AddMessage?message="+$("#newMessage").val(),
            success: function(details){
+             document.getElementById("recu").value=$("#newMessage").val();
+            document.getElementById("newMessage").value='';
 		   }
         });
     }

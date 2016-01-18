@@ -25,16 +25,16 @@ public class AddAjax extends HttpServlet{
 		ResultSet rs;
 		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
-		
+
 		String pseudo = (String) session.getAttribute("pseudo");
 
 		try {
 			con = tools.getConnect();
 			PreparedStatement stmt = con.prepareStatement("select pseudo FROM personne"
 					+ " WHERE pseudo <> ?"
-					+ " AND pseudo LIKE ?"); 
-			// Ajouter test sur amis déjà présents dans les contacts
-			
+					+ " AND pseudo LIKE ?");
+
+
 			stmt.setString(1, pseudo);
 			stmt.setString(2, req.getParameter("name")+"%");
 			rs = stmt.executeQuery();
