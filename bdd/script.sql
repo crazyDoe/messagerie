@@ -28,7 +28,7 @@ create table groupe(
 );
 
 create table message(
-	id serial,
+	id integer,
 	pno text,
 	gno integer,
 	message text,
