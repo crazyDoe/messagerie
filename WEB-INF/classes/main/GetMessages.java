@@ -27,11 +27,15 @@ public class GetMessages extends HttpServlet{
 			con = tools.getConnect();
 			PreparedStatement stmt = con.prepareStatement("select date, pno, message FROM message where gno = ?");
 			
-			stmt.setInt(1, Integer.parseInt((String) req.getSession().getAttribute("groupe")));
-			rs = stmt.executeQuery();
+			String groupe = (String) req.getSession().getAttribute("groupe");
 			
-			while(rs.next())
-				out.println(rs.getString("date") + " - " + rs.getString("pno") + " : " + rs.getString("message"));
+			if(groupe != null){
+				stmt.setInt(1, Integer.parseInt(groupe));
+				rs = stmt.executeQuery();
+			
+				while(rs.next())
+					out.println(rs.getString("date") + " - " + rs.getString("pno") + " : " + rs.getString("message"));
+			}
 		}
 		catch (Exception e) {
 				e.printStackTrace();

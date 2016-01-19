@@ -29,7 +29,7 @@ public class AddMessage extends HttpServlet{
 					
 			String pseudo = "" + session.getAttribute("pseudo");
 			String message = "" + req.getParameter("message");
-			String date = new SimpleDateFormat("dd MMMM yyyy / HH:mm:ss", Locale.FRANCE).format(new Date());
+			String date = new SimpleDateFormat("dd MMMM yyyy - HH:mm", Locale.FRANCE).format(new Date());
 			
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO MESSAGE VALUES(null, ?, ?, ?, ?, ?)");
 			stmt.setString(1, pseudo);

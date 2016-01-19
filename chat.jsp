@@ -79,10 +79,12 @@
 				var text = "";
 					
 				for (j = 0; j < textSplitted.length; j++){
-					if(j == 6)
-						text += "<span style='color: red'>" + textSplitted[j] + "<span> ";
+					if(j >= 0 && j <= 5)
+						text += "<span style='font-weight: bold'>" + textSplitted[j] + "</span> ";
+					else if(textSplitted[j] === "${sessionScope.pseudo}")
+						text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
 					else
-						text += "<span style='color: black'>" + textSplitted[j] + "<span> ";							
+						text += "<span style='color: black'>" + textSplitted[j] + "</span> ";								
 				}
 
 
@@ -110,7 +112,9 @@
 
 					/* Split sur espace, par ligne */
 					for (j = 0; j < textSplitted.length; j++){
-						if(textSplitted[j] === "${sessionScope.pseudo}")
+						if(j >= 0 && j <= 5)
+							text += "<span style='font-weight: bold'>" + textSplitted[j] + "</span> ";
+						else if(textSplitted[j] === "${sessionScope.pseudo}")
 							text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
 						else
 							text += "<span style='color: black'>" + textSplitted[j] + "</span> ";		

@@ -32,7 +32,8 @@ public class SelectContact extends HttpServlet{
 			String pseudo = (String)session.getAttribute("pseudo");
 			
 			// select a vers b
-			PreparedStatement stmt = con.prepareStatement("SELECT pseudo_reception FROM contact where pseudo_ajout = ?");
+			PreparedStatement stmt = con.prepareStatement("SELECT pseudo_reception FROM contact "
+					+ "where pseudo_ajout = ?");
 			stmt.setString(1, pseudo);
 			rs = stmt.executeQuery();
 			
@@ -41,7 +42,8 @@ public class SelectContact extends HttpServlet{
 
 			if(liste.isEmpty()){
 				// select b vers a
-				stmt = con.prepareStatement("SELECT pseudo_ajout FROM contact where pseudo_reception = ?");
+				stmt = con.prepareStatement("SELECT pseudo_ajout FROM contact "
+						+ "where pseudo_reception = ?");
 				stmt.setString(1, pseudo);
 				rs = stmt.executeQuery();
 	

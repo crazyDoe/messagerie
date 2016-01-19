@@ -26,35 +26,29 @@ public class GetCurrentGroup extends HttpServlet{
 		try {
 			con = tools.getConnect();
 						
-			PreparedStatement stmt = con.prepareStatement("SELECT id_groupe FROM contient WHERE pseudo1 = ? and pseudo2 = ?");
+			PreparedStatement stmt = con.prepareStatement("SELECT id_groupe FROM contient "
+					+ "WHERE (pseudo1 = ? and pseudo2 = ?) "
+					+ "or (pseudo1 = ? and pseudo2 = ?)");
 			stmt.setString(1, (String) session.getAttribute("pseudo"));
 			stmt.setString(2, (String) session.getAttribute("friend"));
+			stmt.setString(3, (String) session.getAttribute("friend"));
+			stmt.setString(4, (String) session.getAttribute("pseudo"));
 			rs = stmt.executeQuery();
 			
-			if(rs.next()) { // Si groupe avec pseudo1 et pseudo2 trouve
-				session.setAttribute("groupe", rs.getString("id_groupe"));
+			if(rs.next()) { // Si groupe trouve
+				session.setAttribute("groupe", rs.getString("id_groupe"));	
 			}
-			else{
-				stmt = con.prepareStatement("SELECT id_groupe FROM contient WHERE pseudo2 = ? and pseudo1 = ?");
-				stmt.setString(1, (String) session.getAttribute("pseudo"));
-				stmt.setString(2, (String) session.getAttribute("friend"));
-				rs = stmt.executeQuery();		
-				
-				if(rs.next()) { // Si groupe avec pseudo2 et pseudo1 trouve
-					session.setAttribute("groupe", rs.getString("id_groupe"));	
-				}
-				else{ // on cree un nouveau groupe
-					stmt = con.prepareStatement("INSERT INTO groupe (nom) VALUES(?)");
-					stmt.setString(1, "newGroupe");
-					stmt.executeUpdate();
+			else{ // on cree un nouveau groupe
+				stmt = con.prepareStatement("INSERT INTO groupe (nom) VALUES(?)");
+				stmt.setString(1, "newGroupe");
+				stmt.executeUpdate();
 					
-					// Et on ajoute les deux personnes dedans
-					stmt = con.prepareStatement("INSERT INTO contient VALUES(?,?,?)");
-					stmt.setInt(1, tools.getNbLines("groupe"));
-					stmt.setString(2, (String) session.getAttribute("pseudo"));
-					stmt.setString(3, (String) session.getAttribute("friend"));
-					stmt.executeUpdate();
-				}
+				// Et on ajoute les deux personnes dedans
+				stmt = con.prepareStatement("INSERT INTO contient VALUES(?,?,?)");
+				stmt.setInt(1, tools.getNbLines("groupe"));
+				stmt.setString(2, (String) session.getAttribute("pseudo"));
+				stmt.setString(3, (String) session.getAttribute("friend"));
+				stmt.executeUpdate();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
