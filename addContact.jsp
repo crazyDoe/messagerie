@@ -13,7 +13,7 @@
   </body>
   <%@ include file="footer.html"%>
   <script>
-	$('#nom').ready(function(){
+	$(document).ready(function(){
 		ajax();
 	});
 	$('#nom').keyup(function(){

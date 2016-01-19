@@ -2,6 +2,9 @@ package main;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,12 +29,15 @@ public class AddMessage extends HttpServlet{
 					
 			String pseudo = "" + session.getAttribute("pseudo");
 			String message = "" + req.getParameter("message");
-
+			String date = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
 			
-			PreparedStatement stmt = con.prepareStatement("INSERT INTO MESSAGE VALUES(null, ?, ?, ?)");
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO MESSAGE VALUES(null, ?, ?, ?, ?)");
 			stmt.setString(1, pseudo);
 			stmt.setInt(2, 2); // Groupe 2 ??
 			stmt.setString(3, message);
+			stmt.setString(4, date);
+			
+			res.getWriter().println(date + " - " + pseudo + " : " + message);
 
 			stmt.executeUpdate();
 		} catch (Exception e) {

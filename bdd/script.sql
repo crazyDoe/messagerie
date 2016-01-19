@@ -28,12 +28,12 @@ create table groupe(
 );
 
 create table message(
-	id integer,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	pno text,
 	gno integer,
 	message text,
+	date text,
 
-	constraint pk_message primary key(id, pno, gno),
 	constraint fk_message1 foreign key(pno) references personne(pseudo),
 	constraint fk_message2 foreign key(gno) references groupe(gno)
 );
@@ -55,7 +55,7 @@ INSERT INTO personne VALUES ('bryan','123456');
 INSERT INTO personne VALUES ('bob','marteau');
 
 INSERT INTO groupe (nom) VALUES('test');
-INSERT INTO groupe (nom) VALUES('concert');
+INSERT INTO groupe (nom) VALUES('concert'); /* Faire les groupes */
 
 INSERT INTO contient VALUES(1,'biche');
 INSERT INTO contient VALUES(1,'bryan');
@@ -63,8 +63,3 @@ INSERT INTO contient VALUES(1,'bob');
 INSERT INTO contient VALUES(1,'thor');
 INSERT INTO contient VALUES(2,'thor');
 INSERT INTO contient VALUES(2,'bob');
-
-INSERT INTO message (pno,gno,message) VALUES('biche',1,'Hello');
-INSERT INTO message (pno,gno,message) VALUES('bryan',1,'Ca va ?');
-INSERT INTO message (pno,gno,message) VALUES('bob',2,'Slt oui et toi ?');
-INSERT INTO message (pno,gno,message) VALUES('biche',2,'slt');
