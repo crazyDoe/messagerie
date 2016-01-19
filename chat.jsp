@@ -45,6 +45,7 @@
 
   <script>
  	$(document).ready(function(e){
+ 		getCurrentGroup();
 		getMessages();
 	});
 	$('#envoyer').click(function(){
@@ -54,6 +55,15 @@
 		if(e.keyCode == 13) // Touche entree
 			ajax();
 	});
+
+
+  	function getCurrentGroup() {
+        $.ajax({
+           type: "GET",
+           url: "servlet/GetCurrentGroup",
+        });
+    }
+	
 
   	function ajax() {
         $.ajax({

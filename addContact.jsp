@@ -16,9 +16,6 @@
 	$(document).ready(function(){
 		ajax();
 	});
-	$('#nom').keyup(function(){
-		ajax();
-	});
 	
   	function ajax() {
         $.ajax({
