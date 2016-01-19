@@ -27,7 +27,7 @@ public class GetMessages extends HttpServlet{
 			con = tools.getConnect();
 			PreparedStatement stmt = con.prepareStatement("select date, pno, message FROM message where gno = ?");
 			
-			stmt.setInt(1, 2);
+			stmt.setInt(1, Integer.parseInt((String) req.getSession().getAttribute("groupe")));
 			rs = stmt.executeQuery();
 			
 			while(rs.next())

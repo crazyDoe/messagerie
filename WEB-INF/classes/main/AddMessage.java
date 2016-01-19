@@ -31,11 +31,12 @@ public class AddMessage extends HttpServlet{
 			String message = "" + req.getParameter("message");
 			String date = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
 			
-			PreparedStatement stmt = con.prepareStatement("INSERT INTO MESSAGE VALUES(null, ?, ?, ?, ?)");
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO MESSAGE VALUES(null, ?, ?, ?, ?, ?)");
 			stmt.setString(1, pseudo);
-			stmt.setInt(2, 2); // Groupe 2 ??
+			stmt.setInt(2, Integer.parseInt((String) session.getAttribute("groupe")));
 			stmt.setString(3, message);
 			stmt.setString(4, date);
+			stmt.setInt(5, 0);
 			
 			res.getWriter().println(date + " - " + pseudo + " : " + message);
 

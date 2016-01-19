@@ -21,10 +21,8 @@ create table contact(
 );
 
 create table groupe(
-	gno integer,
-	nom text,
-
-	constraint pk_groupe primary key(gno)
+	gno INTEGER PRIMARY KEY AUTOINCREMENT,
+	nom text
 );
 
 create table message(
@@ -33,6 +31,7 @@ create table message(
 	gno integer,
 	message text,
 	date text,
+	vu integer, /* 1, vu, 0, pas vu */
 
 	constraint fk_message1 foreign key(pno) references personne(pseudo),
 	constraint fk_message2 foreign key(gno) references groupe(gno)
@@ -40,11 +39,13 @@ create table message(
 
 create table contient(
 	id_groupe integer,
-	pseudo_personne text,
+	pseudo1 text,
+	pseudo2 text,
 
-	constraint pk_contient primary key(id_groupe, pseudo_personne),
+	constraint pk_contient primary key(id_groupe, pseudo1, pseudo2),
 	constraint fk_contient1 foreign key(id_groupe) references groupe(gno),
-	constraint fk_contient2 foreign key(pseudo_personne) references personne(pseudo)
+	constraint fk_contient2 foreign key(pseudo1) references personne(pseudo),
+	constraint fk_contient3 foreign key(pseudo2) references personne(pseudo)
 );
 
 INSERT INTO personne VALUES ('biche','123456');
@@ -53,13 +54,3 @@ INSERT INTO personne VALUES ('admin','admin');
 INSERT INTO personne VALUES ('thor','jamesbond');
 INSERT INTO personne VALUES ('bryan','123456');
 INSERT INTO personne VALUES ('bob','marteau');
-
-INSERT INTO groupe (nom) VALUES('test');
-INSERT INTO groupe (nom) VALUES('concert'); /* Faire les groupes */
-
-INSERT INTO contient VALUES(1,'biche');
-INSERT INTO contient VALUES(1,'bryan');
-INSERT INTO contient VALUES(1,'bob');
-INSERT INTO contient VALUES(1,'thor');
-INSERT INTO contient VALUES(2,'thor');
-INSERT INTO contient VALUES(2,'bob');
