@@ -1,11 +1,11 @@
 #main-wrapper{
   margin: auto;
   width: 1200px;
-  background: #B09F91 ;
+  background: #D3D3D3 ;
 }
 
 body{
-  background : #5EB6DD;
+  background : #87CEFA;
 }
 
 #headerM{
@@ -40,8 +40,10 @@ body{
 
 
 .listeContacts {
-  background-color: #e8d2de;
+  background-color: #D3D3D3;
+  color: #101010;
   overflow:auto;
+  border-left: 1px solid black;
   height: 100%;
   text-align: right;
   padding: 0px;
@@ -69,7 +71,7 @@ body{
   height: 550px;
   width: 900px;
   margin-left: 40px;
-  background-color: #f5f5d5;
+  background-color: #ffffff;
   overflow: scroll;
 }
 

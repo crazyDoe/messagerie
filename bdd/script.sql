@@ -52,3 +52,19 @@ INSERT INTO personne VALUES ('admin','admin');
 INSERT INTO personne VALUES ('thor','jamesbond');
 INSERT INTO personne VALUES ('bryan','123456');
 INSERT INTO personne VALUES ('bob','marteau');
+
+INSERT INTO message VALUES(null,'biche',1,'Hello','10/12/2014',0);
+INSERT INTO message VALUES(null,'bob',1,'Hello','10/12/2014',0);
+INSERT INTO message VALUES(null,'biche',1,'Ca va ?','10/12/2014',0);
+INSERT INTO message VALUES(null,'bob',1,'oui','10/12/2015',0);
+
+INSERT INTO message VALUES(null,'biche',2,'Hello','10/12/2014',0);
+INSERT INTO message VALUES(null,'bob',2,'Hello','10/12/2014',0);
+INSERT INTO message VALUES(null,'biche',4,'Ca va ?','10/12/2014',0);
+INSERT INTO message VALUES(null,'bob',4,'oui','15/12/2016',0);
+
+INSERT INTO contient VALUES(1,'biche');
+INSERT INTO contient VALUES(1,'bob');
+INSERT INTO contient VALUES(2,'biche');
+INSERT INTO contient VALUES(2,'bob');
+INSERT INTO contient VALUES(4,'biche');
