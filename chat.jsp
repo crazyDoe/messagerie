@@ -44,6 +44,10 @@
   </body>
 
   <script>
+    window.onload = function() {
+ 		getCurrentGroup();
+		getMessages();
+    };
  	$(document).ready(function(e){
  		getCurrentGroup();
 		getMessages();
@@ -71,7 +75,20 @@
            url: "servlet/AddMessage?message="+$("#newMessage").val(),
            success: function(details){
 				// Update la zone de reception
-				$('#recu').append(details + "<br />");
+				var textSplitted = details.split(" ");
+				var text = "";
+					
+				for (j = 0; j < textSplitted.length; j++){
+					if(j >= 0 && j <= 5)
+						text += "<span style='font-weight: bold'>" + textSplitted[j] + "</span> ";
+					else if(textSplitted[j] === "${sessionScope.pseudo}")
+						text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
+					else
+						text += "<span style='color: black'>" + textSplitted[j] + "</span> ";								
+				}
+
+
+				$('#recu').append(text + "<br />");
 				
 				// Clear la zone d'envoi
 				document.getElementById("newMessage").value='';
@@ -83,19 +100,30 @@
 	    $.ajax({
            type: "GET",
            url: "servlet/GetMessages?pseudo=${sessionScope.pseudo}",
-           success: function(details){
-		   		$('#recu').text("");
-				
+           success: function(details){				
 				var tab = details.split("\n");
-				var i;
-				var text;
+				var i, j;
+				var text = "";
 				
+				/* nombre de lignes */
 				for (i = 0; i < tab.length; i++){
-					text = tab[i];
+					var textSplitted = tab[i].split(" ");
 					
+
+					/* Split sur espace, par ligne */
+					for (j = 0; j < textSplitted.length; j++){
+						if(j >= 0 && j <= 5)
+							text += "<span style='font-weight: bold'>" + textSplitted[j] + "</span> ";
+						else if(textSplitted[j] === "${sessionScope.pseudo}")
+							text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
+						else
+							text += "<span style='color: black'>" + textSplitted[j] + "</span> ";		
+					} 
+
 					if(i != tab.length-1)
 						text += "<br />";
-					$('#recu').append(text);
+				
+					$('#recu').html(text);
 				}
 		   }
         });
