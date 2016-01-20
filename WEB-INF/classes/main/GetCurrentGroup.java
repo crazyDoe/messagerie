@@ -25,24 +25,33 @@ public class GetCurrentGroup extends HttpServlet{
 
 		try {
 			con = tools.getConnect();
+			String group_name = (String) session.getAttribute("group_name");
+			String pseudo = (String) session.getAttribute("pseudo");
 						
-			PreparedStatement stmt = con.prepareStatement("SELECT gno FROM groupe WHERE nom = ?");
-			stmt.setString(1, (String) session.getAttribute("gno"));
+			PreparedStatement stmt = con.prepareStatement("SELECT gno FROM groupe WHERE nom = ? or nom = ?");
+			stmt.setString(1, group_name+""+pseudo);
+			stmt.setString(2, pseudo+""+group_name);
 			rs = stmt.executeQuery();
 			
 			if(rs.next()) { // Si groupe trouve
-				session.setAttribute("groupe", rs.getString("id_groupe"));	
+				session.setAttribute("groupe", rs.getString("gno"));	
 			}
 			else{ // on cree un nouveau groupe
 				stmt = con.prepareStatement("INSERT INTO groupe (nom) VALUES(?)");
-				stmt.setString(1, "newGroupe");
+				stmt.setString(1, group_name+""+pseudo);
 				stmt.executeUpdate();
+				
+				int nbLines = tools.getNbLines("groupe");
 					
 				// Et on ajoute les deux personnes dedans
-				stmt = con.prepareStatement("INSERT INTO contient VALUES(?,?,?)");
-				stmt.setInt(1, tools.getNbLines("groupe"));
-				stmt.setString(2, (String) session.getAttribute("pseudo"));
-				stmt.setString(3, (String) session.getAttribute("friend"));
+				stmt = con.prepareStatement("INSERT INTO contient VALUES(?,?)");
+				stmt.setInt(1, nbLines);
+				stmt.setString(2, pseudo);
+				stmt.executeUpdate();
+				
+				stmt = con.prepareStatement("INSERT INTO contient VALUES(?,?)");
+				stmt.setInt(1, nbLines);
+				stmt.setString(2, (String) group_name);
 				stmt.executeUpdate();
 			}
 		} catch (Exception e) {

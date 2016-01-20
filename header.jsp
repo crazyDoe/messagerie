@@ -14,7 +14,7 @@
               <li> <a href="addContact.jsp"> <i class="fa fa-pencil"></i> Ajouter Ami </a></li>
               <li class="divider"></li>
               <li <a href="">
-                <a href="chat.jsp"> <i class="fa fa-pencil"></i> Ajouter Groupe </i> </a>
+                <a href="addGroup.jsp"> <i class="fa fa-pencil"></i> Creer Groupe </i> </a>
               </li>
             </ul>
           </li>

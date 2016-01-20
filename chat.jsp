@@ -9,17 +9,17 @@
   </head>
   <body>
     <% Object pseudo = session.getAttribute("pseudo");
-       Object friend = request.getParameter("friend");
+       Object group_name = request.getParameter("group_name");
 
-    session.setAttribute("friend", friend);
+    session.setAttribute("group_name", group_name);
 
-    if(friend == null)
+    if(group_name == null)
       response.sendRedirect("login.jsp"); %>
     <%@ include file="header.jsp" %>
     <div class="row recu">
       <div class="col-md-10">
-        <% if (new File(request.getServletContext().getRealPath("/") + "img/" + friend + "Avatar.png").exists()){ %>
-          <img class="moyenAvatar discu-avatar" src="img/${sessionScope.friend}Avatar.png">
+        <% if (new File(request.getServletContext().getRealPath("/") + "img/" + group_name + "Avatar.png").exists()){ %>
+          <img class="moyenAvatar discu-avatar" src="img/${sessionScope.group_name}Avatar.png">
         <% } else{ %>
 			<img class="moyenAvatar discu-avatar" src="img/defaultAvatar.png">
         <% } %>
@@ -48,10 +48,6 @@
  		getCurrentGroup();
 		getMessages();
     };
- 	$(document).ready(function(e){
- 		getCurrentGroup();
-		getMessages();
-	});
 	$('#envoyer').click(function(){
 		ajax();
 	});
@@ -99,8 +95,8 @@
 	function getMessages() {
 	    $.ajax({
            type: "GET",
-           url: "servlet/GetMessages?pseudo=${sessionScope.pseudo}",
-           success: function(details){				
+           url: "servlet/GetMessages",
+           success: function(details){		
 				var tab = details.split("\n");
 				var i, j;
 				var text = "";
@@ -114,7 +110,7 @@
 					for (j = 0; j < textSplitted.length; j++){
 						if(j >= 0 && j <= 5)
 							text += "<span style='font-weight: bold'>" + textSplitted[j] + "</span> ";
-						else if(textSplitted[j] === "${sessionScope.pseudo}")
+						else if(textSplitted[j] === "${sessionScope.pseudo}" || textSplitted[j] === "${sessionScope.group_name}")
 							text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
 						else
 							text += "<span style='color: black'>" + textSplitted[j] + "</span> ";		
