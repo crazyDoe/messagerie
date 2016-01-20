@@ -21,12 +21,12 @@ create table contact(
 );
 
 create table groupe(
-	gno INTEGER PRIMARY KEY AUTOINCREMENT,
+	gno INTEGER /*PRIMARY KEY AUTOINCREMENT*/,
 	nom text
 );
 
 create table message(
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	id INTEGER /*PRIMARY KEY AUTOINCREMENT*/,
 	pno text,
 	gno integer,
 	message text,

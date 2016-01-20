@@ -17,7 +17,6 @@ import outils.BDDTools;
 
 @WebServlet("/servlet/AddMessage")
 public class AddMessage extends HttpServlet{
-	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
 		BDDTools tools = new BDDTools(req,res);
@@ -26,7 +25,7 @@ public class AddMessage extends HttpServlet{
 
 		try {
 			con = tools.getConnect();
-					
+
 			String pseudo = "" + session.getAttribute("pseudo");
 			String message = "" + req.getParameter("message");
 			String date = new SimpleDateFormat("dd MMMM yyyy - HH:mm", Locale.FRANCE).format(new Date());
@@ -37,7 +36,7 @@ public class AddMessage extends HttpServlet{
 			stmt.setString(3, message);
 			stmt.setString(4, date);
 			stmt.setInt(5, 0);
-			
+
 			res.getWriter().println(date + " - " + pseudo + " : " + message);
 
 			stmt.executeUpdate();
