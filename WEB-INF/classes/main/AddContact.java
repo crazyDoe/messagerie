@@ -27,7 +27,7 @@ public class AddContact extends HttpServlet{
 			String nomCourant = ""+session.getAttribute("pseudo");
 			String nomGroupe = req.getParameter("nomGroupe");
 			
-			if(nomGroupe == null) { // Si on ne crée pas un groupe de plus d'une personne
+			if(nomGroupe == null) { // Si on ne cree pas un groupe de plus d'une personne
 				String nomSaisi = req.getParameter("nomSaisi");
 	
 				PreparedStatement stmt = con.prepareStatement("INSERT INTO contact VALUES(?,?)");
@@ -40,21 +40,33 @@ public class AddContact extends HttpServlet{
 				
 				PreparedStatement stmt;
 				
-				stmt = con.prepareStatement("INSERT INTO contact VALUES(?, ?)");
-				stmt.setString(1, nomCourant);
-				stmt.setString(2, nomGroupe);
-				stmt.executeUpdate();
-				
 				stmt = con.prepareStatement("INSERT INTO groupe (nom) VALUES(?)");
 				stmt.setString(1, nomGroupe);
 				stmt.executeUpdate();
 				
 				int group = tools.getNbLines("groupe");
 				
+				stmt = con.prepareStatement("INSERT INTO contact VALUES(?, ?)");
+				stmt.setString(1, nomCourant);
+				stmt.setString(2, nomGroupe);
+				stmt.executeUpdate();
+				
+				stmt = con.prepareStatement("INSERT INTO CONTIENT VALUES(?, ?)");
+				stmt.setInt(1, group);
+				stmt.setString(2, nomCourant);
+				stmt.executeUpdate();
+				
+				for(String s : results){
+					stmt = con.prepareStatement("INSERT INTO contact VALUES(?, ?)");
+					stmt.setString(1, s.trim());
+					stmt.setString(2, nomGroupe);
+					stmt.executeUpdate();
+				}
+				
 				for(String s : results){
 					stmt = con.prepareStatement("INSERT INTO CONTIENT VALUES(?, ?)");
 					stmt.setInt(1, group);
-					stmt.setString(2, s);
+					stmt.setString(2, s.trim());
 					stmt.executeUpdate();
 				}
 			}

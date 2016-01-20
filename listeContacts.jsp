@@ -1,9 +1,9 @@
 <div class="col-md-2 listeContacts">
-  <h3> <center> Mes contacts </center> </h3> <br />
+	<% List<String> contacts = (List<String>)session.getAttribute("contacts"); %>
+
+  <h3> <center> Mes contacts (<%= contacts.size()%>)</center> </h3> <br />
   <h4>
-	<%
-	List<String> contacts = (List<String>)session.getAttribute("contacts");
-	if(contacts != null){ %>
+	<% if(contacts != null){ %>
     <ul> <%
 		for(String s : contacts){
 			if (new File(request.getServletContext().getRealPath("/") + "img/" + s + "Avatar.png").exists())

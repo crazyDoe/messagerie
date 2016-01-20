@@ -29,9 +29,8 @@ public class NotifMessage extends HttpServlet{
 
 		try {
 			con = tools.getConnect();
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM message WHERE vu=0 AND gno = (SELECT id_groupe FROM contient WHERE pseudo1= ? OR pseudo2= ?);");
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM message WHERE vu=0 AND gno = (SELECT id_groupe FROM contient WHERE pseudo = ?);");
 			stmt.setString(1, pseudo);
-			stmt.setString(2, pseudo);
 			rs = stmt.executeQuery();
 			if(rs.next())
 				out.println("<i style='color:red' class='fa fa-exclamation-circle'></i>");

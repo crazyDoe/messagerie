@@ -46,7 +46,9 @@
   <script>
     window.onload = function() {
  		getCurrentGroup();
-		getMessages();
+		setInterval(function(){ 
+			getMessages();
+		}, 500);
     };
 	$('#envoyer').click(function(){
 		ajax();
@@ -77,7 +79,7 @@
 				for (j = 0; j < textSplitted.length; j++){
 					if(j >= 0 && j <= 5)
 						text += "<span style='font-weight: bold'>" + textSplitted[j] + "</span> ";
-					else if(textSplitted[j] === "${sessionScope.pseudo}")
+					else if(j == 6)
 						text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
 					else
 						text += "<span style='color: black'>" + textSplitted[j] + "</span> ";								
@@ -110,7 +112,7 @@
 					for (j = 0; j < textSplitted.length; j++){
 						if(j >= 0 && j <= 5)
 							text += "<span style='font-weight: bold'>" + textSplitted[j] + "</span> ";
-						else if(textSplitted[j] === "${sessionScope.pseudo}" || textSplitted[j] === "${sessionScope.group_name}")
+						else if(j == 6)
 							text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
 						else
 							text += "<span style='color: black'>" + textSplitted[j] + "</span> ";		
