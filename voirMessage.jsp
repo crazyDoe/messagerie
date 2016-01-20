@@ -25,9 +25,9 @@
             stmt.setString(1,(String)request.getSession().getAttribute("pseudo"));
             rs = stmt.executeQuery();
               while(rs.next()){ %>
-              <a href="">
+              <a href=chat.jsp?group_name=<%=rs.getString("pno")%> />
                 <div class="row mess">
-                  <img class="avatar-message" src="img/defaultAvatar.png" alt="Avatar Utilisateur">
+                  <img class=avatar-message src=img/<%= rs.getString("pno") %>Avatar.png alt=Avatar Utilisateur>
                     <h4 class="pseudo-message"> <%= rs.getString("pno") %> : </h4>
                     <p class="text-message"><%= rs.getString("message") %><p>
                 </div>
