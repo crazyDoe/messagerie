@@ -2,7 +2,6 @@ package main;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,21 +23,44 @@ public class AddContact extends HttpServlet{
 
 		try {
 			con = tools.getConnect();
-			String nomSaisi = req.getParameter("nomSaisi");
-			String nomCourant = ""+session.getAttribute("pseudo");
 
-			@SuppressWarnings("unchecked")
-			List<String> liste = (List<String>)session.getAttribute("contacts");
-			liste.add(nomSaisi);
-			session.setAttribute("contacts", liste);
+			String nomCourant = ""+session.getAttribute("pseudo");
+			String nomGroupe = req.getParameter("nomGroupe");
 			
-			PreparedStatement stmt = con.prepareStatement("INSERT INTO contact VALUES(?,?)");
-			stmt.setString(1, nomCourant);
-			stmt.setString(2, nomSaisi);
-			stmt.executeUpdate();
+			if(nomGroupe == null) { // Si on ne crée pas un groupe de plus d'une personne
+				String nomSaisi = req.getParameter("nomSaisi");
+	
+				PreparedStatement stmt = con.prepareStatement("INSERT INTO contact VALUES(?,?)");
+				stmt.setString(1, nomCourant);
+				stmt.setString(2, nomSaisi);
+				stmt.executeUpdate();
+			}
+			else{ // On cree un groupe de plusieurs personnes								
+				String[] results = req.getParameterValues("checkboxes");
+				
+				PreparedStatement stmt;
+				
+				stmt = con.prepareStatement("INSERT INTO contact VALUES(?, ?)");
+				stmt.setString(1, nomCourant);
+				stmt.setString(2, nomGroupe);
+				stmt.executeUpdate();
+				
+				stmt = con.prepareStatement("INSERT INTO groupe (nom) VALUES(?)");
+				stmt.setString(1, nomGroupe);
+				stmt.executeUpdate();
+				
+				int group = tools.getNbLines("groupe");
+				
+				for(String s : results){
+					stmt = con.prepareStatement("INSERT INTO CONTIENT VALUES(?, ?)");
+					stmt.setInt(1, group);
+					stmt.setString(2, s);
+					stmt.executeUpdate();
+				}
+			}
 			res.sendRedirect("SelectContact");
 		} catch (Exception e) {
-			e.printStackTrace();
+			res.getWriter().println(e);
 		}
 		finally{
 			tools.close();
