@@ -32,9 +32,7 @@ public class AddAjax extends HttpServlet{
 			PreparedStatement stmt = con.prepareStatement("select pseudo FROM personne"
 					+ " WHERE pseudo <> ?"
 					+ " AND pseudo LIKE ?");
-			
 			// Ajouter test sur amis deja presents dans les contacts
-			
 			stmt.setString(1, pseudo);
 			stmt.setString(2, req.getParameter("name")+"%");
 			rs = stmt.executeQuery();
