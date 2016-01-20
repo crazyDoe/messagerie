@@ -2,7 +2,6 @@ package main;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,34 +20,23 @@ public class AddContact extends HttpServlet{
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
 		BDDTools tools = new BDDTools(req,res);
 		Connection con = null;
-		ResultSet rs;
 		HttpSession session = req.getSession();
 
 		try {
 			con = tools.getConnect();
 			String nomSaisi = req.getParameter("nomSaisi");
 			String nomCourant = ""+session.getAttribute("pseudo");
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM personne WHERE pseudo= ?");
-			stmt.setString(1, nomSaisi);
-			rs = stmt.executeQuery();
-			if(rs.next())
-			{
-				@SuppressWarnings("unchecked")
-				List<String> liste = (List<String>)session.getAttribute("contacts");
-				liste.add(nomSaisi);
-				req.getSession().setAttribute("contacts", liste);
-				stmt = con.prepareStatement("INSERT INTO contact VALUES(?,?)");
-				stmt.setString(1, nomCourant);
-				stmt.setString(2, nomSaisi);
-				stmt.executeUpdate();
-				res.sendRedirect("SelectContact");
-			}
-			else
-			{
-				session.setAttribute("erreur","Cet utilisateur n'existe pas");
-				res.sendRedirect(req.getContextPath() + "/addContact.jsp");
-			}
 
+			@SuppressWarnings("unchecked")
+			List<String> liste = (List<String>)session.getAttribute("contacts");
+			liste.add(nomSaisi);
+			session.setAttribute("contacts", liste);
+			
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO contact VALUES(?,?)");
+			stmt.setString(1, nomCourant);
+			stmt.setString(2, nomSaisi);
+			stmt.executeUpdate();
+			res.sendRedirect("SelectContact");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

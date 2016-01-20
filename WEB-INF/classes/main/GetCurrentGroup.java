@@ -26,13 +26,8 @@ public class GetCurrentGroup extends HttpServlet{
 		try {
 			con = tools.getConnect();
 						
-			PreparedStatement stmt = con.prepareStatement("SELECT id_groupe FROM contient "
-					+ "WHERE (pseudo1 = ? and pseudo2 = ?) "
-					+ "or (pseudo1 = ? and pseudo2 = ?)");
-			stmt.setString(1, (String) session.getAttribute("pseudo"));
-			stmt.setString(2, (String) session.getAttribute("friend"));
-			stmt.setString(3, (String) session.getAttribute("friend"));
-			stmt.setString(4, (String) session.getAttribute("pseudo"));
+			PreparedStatement stmt = con.prepareStatement("SELECT gno FROM groupe WHERE nom = ?");
+			stmt.setString(1, (String) session.getAttribute("gno"));
 			rs = stmt.executeQuery();
 			
 			if(rs.next()) { // Si groupe trouve

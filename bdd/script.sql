@@ -39,13 +39,11 @@ create table message(
 
 create table contient(
 	id_groupe integer,
-	pseudo1 text,
-	pseudo2 text,
+	pseudo text,
 
-	constraint pk_contient primary key(id_groupe, pseudo1, pseudo2),
+	constraint pk_contient primary key(id_groupe, pseudo),
 	constraint fk_contient1 foreign key(id_groupe) references groupe(gno),
-	constraint fk_contient2 foreign key(pseudo1) references personne(pseudo),
-	constraint fk_contient3 foreign key(pseudo2) references personne(pseudo)
+	constraint fk_contient2 foreign key(pseudo) references personne(pseudo)
 );
 
 INSERT INTO personne VALUES ('biche','123456');
