@@ -115,13 +115,13 @@
 						else if(j == 6)
 							text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
 						else
-							text += "<span style='color: black'>" + textSplitted[j] + "</span> ";		
+							text += "<span style='color: black'>" + textSplitted[j] + "</span> ";
 					} 
 
 					if(i != tab.length-1)
 						text += "<br />";
 				
-					$('#recu').text(text);
+					$('#recu').html(text);
 				}
 		   }
         });

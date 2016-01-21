@@ -27,7 +27,7 @@ public class AddContact extends HttpServlet{
 			String nomCourant = ""+session.getAttribute("pseudo");
 			String nomGroupe = req.getParameter("nomGroupe");
 			
-			if(nomGroupe == null) { // Si on ne cree pas un groupe de plus d'une personne
+			if(nomGroupe == null) { // On cree un groupe de deux personnes
 				String nomSaisi = req.getParameter("nomSaisi");
 	
 				PreparedStatement stmt = con.prepareStatement("INSERT INTO contact VALUES(?,?)");
