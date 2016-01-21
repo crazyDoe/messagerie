@@ -121,7 +121,7 @@
 					if(i != tab.length-1)
 						text += "<br />";
 				
-					$('#recu').html(text);
+					$('#recu').text(text);
 				}
 		   }
         });
