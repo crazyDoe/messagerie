@@ -1,3 +1,11 @@
+<script>
+        $.ajax({
+           type: "GET",
+           url: "servlet/SelectContact",
+        });
+</script>
+
+
 <div class="col-md-2 listeContacts">
 	<% List<String> contacts = (List<String>)session.getAttribute("contacts"); %>
 
