@@ -8,13 +8,10 @@
     <title>Messages</title>
   </head>
   <body>
-    <%
-    BDDTools tools = new BDDTools(request,response);
+    <% BDDTools tools = new BDDTools(request,response);
     Connection con = null;
-    ResultSet rs;
-    con = tools.getConnect();
-    %>
-    <%! String test = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? "; %>
+    ResultSet rs,rsA,rsB;
+    con = tools.getConnect(); %>
     <%@ include file="header.jsp"%>
     <div class="row" id="menu1">
       <div class="col-md-10">
@@ -24,17 +21,49 @@
 
             stmt.setString(1,(String)request.getSession().getAttribute("pseudo"));
             rs = stmt.executeQuery();
-              while(rs.next()){ %>
-              <a href=chat.jsp?group_name=<%=rs.getString("pno")%> />
-                <div class="row mess">
-                  <img class=avatar-message src=img/<%= rs.getString("pno") %>Avatar.png alt=Avatar Utilisateur>
-                    <h4 class="pseudo-message"> <%= rs.getString("pno") %> : </h4>
-                    <p class="text-message"><%= rs.getString("message") %><p>
-                </div>
-              </a>
-          <%  } %>
+              while(rs.next()){
+                // Si Groupe de 2
+                stmt = con.prepareStatement("SELECT pseudo FROM contient WHERE id_groupe = ? AND pseudo <> ? ");
+                stmt.setInt(1,rs.getInt("gno"));
+                stmt.setString(2,(String)request.getSession().getAttribute("pseudo"));
+                rsA = stmt.executeQuery();
+                Integer compteur = 0;
+                while (rsA.next()){compteur++;}
+                rsA = stmt.executeQuery();
+                if (rsA.next())
+                {
+                  if(compteur == 1)
+                  { %>
+                  <a href=chat.jsp?group_name=<%=rsA.getString("pseudo")%> />
+                    <div class="row mess">
+                      <img class=avatar-message src=img/<%= rsA.getString("pseudo") %>Avatar.png alt=Avatar Utilisateur>
+                        <h4 class="pseudo-message"> <%= rsA.getString("pseudo") %> : </h4>
+                        <p class="text-message"><%= rs.getString("message") %><p>
+                    </div>
+                  </a>
+                  <% }
+                  // Si Groupe de plus de 2 personnes
+                  else{
+                    stmt = con.prepareStatement("SELECT nom FROM groupe WHERE gno = ?");
+                    stmt.setInt(1,rs.getInt("gno"));
+                    rsB = stmt.executeQuery();
+                    if(rsB.next())
+                     {
+                       String nomGroupe = rsB.getString("nom"); %>
+                       <a href=chat.jsp?group_name=<%=rsB.getString("nom")%> />
+                         <div class="row mess">
+                           <img class=avatar-message src=img/defaultAvatar.png alt=Avatar Utilisateur>
+                             <h4 class="pseudo-message"> <%= rsB.getString("nom") %> : </h4>
+                             <p class="text-message"><%= rs.getString("message") %><p>
+                         </div>
+                       </a>
+                    <% } %> <!-- Fermeture If rsB -->
+                  <% } %><!-- Fermeture If else -->
+                <% } %> <!-- Fermeture If rsA -->
+              <% } %> <!-- Fermeture W -->
         </div>
       </div>
+      <% tools.close();%>
       <%@ include file="listeContacts.jsp" %>
 
     </div>
