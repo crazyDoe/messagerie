@@ -45,7 +45,7 @@ public class AddContact extends HttpServlet{
 				stmt.executeUpdate();
 				
 				int group = tools.getNbLines("groupe");
-				
+			
 				stmt = con.prepareStatement("INSERT INTO contact VALUES(?, ?)");
 				stmt.setString(1, nomCourant);
 				stmt.setString(2, nomGroupe);
@@ -62,7 +62,7 @@ public class AddContact extends HttpServlet{
 					stmt.setString(2, nomGroupe);
 					stmt.executeUpdate();
 				}
-				
+								
 				for(String s : results){
 					stmt = con.prepareStatement("INSERT INTO CONTIENT VALUES(?, ?)");
 					stmt.setInt(1, group);

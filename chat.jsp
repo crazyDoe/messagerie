@@ -24,7 +24,7 @@
 			<img class="moyenAvatar discu-avatar" src="img/defaultAvatar.png">
         <% } %>
         <div class="text-recu" id="recu" ></div>
-    </div>
+      </div>
       <%@ include file="listeContacts.jsp" %>
     </div>
     <div class="row recu">
