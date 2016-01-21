@@ -24,7 +24,7 @@
 			<img class="moyenAvatar discu-avatar" src="img/defaultAvatar.png">
         <% } %>
         <div class="text-recu" id="recu" ></div>
-    </div>
+      </div>
       <%@ include file="listeContacts.jsp" %>
     </div>
     <div class="row recu">
@@ -115,13 +115,13 @@
 						else if(j == 6)
 							text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
 						else
-							text += "<span style='color: black'>" + textSplitted[j] + "</span> ";		
+							text += "<span style='color: black'>" + textSplitted[j] + "</span> ";
 					} 
 
 					if(i != tab.length-1)
 						text += "<br />";
 				
-					$('#recu').text(text);
+					$('#recu').html(text);
 				}
 		   }
         });
