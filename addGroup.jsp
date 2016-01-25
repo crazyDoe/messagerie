@@ -11,7 +11,6 @@
      <form action='servlet/AddContact' method='get' >
         Nom du groupe: <input type="text" name="nomGroupe"> <br />
         <div id="liste"></div>
-
         <input type="submit" value="Creer le groupe" name="creerGrp" class="btn btn-primary btn-lg">
      </form>
   </body>

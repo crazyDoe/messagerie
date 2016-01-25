@@ -66,11 +66,18 @@
         });
     }
 	
+	function escapeHtml(text) {
+    	'use strict';
+    	
+    	return text.replace(/[\"&<>]/g, function (a) {
+        	return { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;' }[a];
+    	});
+	}
 
   	function ajax() {
         $.ajax({
            type: "GET",
-           url: "servlet/AddMessage?message="+$("#newMessage").val(),
+           url: "servlet/AddMessage?message="+ escapeHtml($("#newMessage").val()),
            success: function(details){
 				// Update la zone de reception
 				var textSplitted = details.split(" ");
