@@ -1,4 +1,4 @@
-package main;
+package controler;
 // Servlet Test.java  de test de la configuration
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import outils.BDDTools;
+import model.BDDTools;
+
 
 @WebServlet("/servlet/SelectContact")
 public class SelectContact extends HttpServlet{
@@ -31,7 +32,6 @@ public class SelectContact extends HttpServlet{
 			List<String> liste = new LinkedList<String>();
 			String pseudo = (String)session.getAttribute("pseudo");
 			
-			// select a vers b
 			PreparedStatement stmt = con.prepareStatement("SELECT pseudo_reception FROM contact "
 					+ "where pseudo_ajout = ?");
 			stmt.setString(1, pseudo);
@@ -40,16 +40,13 @@ public class SelectContact extends HttpServlet{
 			while(rs.next())
 				liste.add(rs.getString("pseudo_reception"));
 
-			if(liste.isEmpty()){
-				// select b vers a
-				stmt = con.prepareStatement("SELECT pseudo_ajout FROM contact "
+			stmt = con.prepareStatement("SELECT pseudo_ajout FROM contact "
 						+ "where pseudo_reception = ?");
-				stmt.setString(1, pseudo);
-				rs = stmt.executeQuery();
+			stmt.setString(1, pseudo);
+			rs = stmt.executeQuery();
 	
-				while(rs.next())
-					liste.add(rs.getString("pseudo_ajout"));
-			}
+			while(rs.next())
+				liste.add(rs.getString("pseudo_ajout"));
 			
 			session.setAttribute("contacts", liste);
 			session.setAttribute("pseudo", pseudo);

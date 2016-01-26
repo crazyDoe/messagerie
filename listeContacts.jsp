@@ -12,15 +12,28 @@
   <h3> <center> Mes contacts (<%= contacts.size()%>)</center> </h3> <br />
   <h4>
 	<% if(contacts != null){ %>
-    <ul> <%
+    <table> <%
 		for(String s : contacts){
-			if (new File(request.getServletContext().getRealPath("/") + "img/" + s + "Avatar.png").exists())
-				out.println("<li class='maListe'><a href='chat.jsp?group_name=" + s +"'><span class='contact'>"+s +"&nbsp <img class='petitAvatar' src='img/" + s + "Avatar.png'></span><br /></li></a>&nbsp");
-			else
-				out.println("<li class ='maListe'><a href='chat.jsp?group_name=" + s +"'><span class='contact'>"+s +"&nbsp <img class='petitAvatar' src='img/defaultAvatar.png'></span><br /></li></a>&nbsp");
+      %> <tr>	<%
+            if (new File(request.getServletContext().getRealPath("/") + "img/" + s + "Avatar.png").exists()){
+      				out.println("<td><a href='chat.jsp?group_name=" + s +"'>" + s + "</a></td>");
+              out.println("<td><img class='petitAvatar' src='img/" + s + "Avatar.png'></td>");
+            }
+      			else{
+      				out.println("<td><a href='chat.jsp?group_name=" + s +"'>" + s + "</a></td>");
+              out.println("<td><img class='petitAvatar' src='img/defaultAvatar.png'></td>");
+            }
+       %> </td>
+
+           <td> <%
+              out.println("<a href='servlet/GetCurrentGroup?next_function=delete_group&group_name=" + s + "' class='fa fa-times-circle' style='color: red'> </a>");
+        %> </td>
+
+          &nbsp; &nbsp; 
+
+        </tr> <%
 		}
-       %> </ul> 
-          <% }
-	     %>
+ %> </table> 
+<% } %>
   </h4>
 </div>

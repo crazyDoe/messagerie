@@ -1,5 +1,5 @@
 <%@ page import="java.util.List, java.io.File, java.sql.*" %>
-<%@ page import="outils.BDDTools" %>
+<%@ page import="model.BDDTools" %>
 <!DOCTYPE html>
 <html>
   <head>
