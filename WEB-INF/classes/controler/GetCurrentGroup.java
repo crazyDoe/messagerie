@@ -23,21 +23,32 @@ public class GetCurrentGroup extends HttpServlet{
 		Connection con = null;
 		ResultSet rs;
 		HttpSession session = req.getSession();
-
+		boolean deleteMode = false;
+		String group_name;
+		
 		try {
 			con = tools.getConnect();
-			String group_name = (String) session.getAttribute("group_name");
+
 			String next_function = (String) req.getParameter("next_function");
 			String pseudo = (String) session.getAttribute("pseudo");
+			
+			if(next_function != null && next_function.equals("delete_group")){
+				deleteMode = true;
+				group_name = req.getParameter("group_name");
+				session.setAttribute("group_name", group_name);
+			}
+			else{
+				group_name = (String) session.getAttribute("group_name");
+			}
 						
 			PreparedStatement stmt;
 			
 			stmt = con.prepareStatement("SELECT gno FROM groupe WHERE nom = ?");
 			stmt.setString(1, group_name);
 			rs = stmt.executeQuery();
-			
+						
 			if(rs.next()){ // groupe de plusieurs personnes trouve
-				session.setAttribute("numGroupe", rs.getInt("gno"));	
+				session.setAttribute("numGroupe", rs.getInt("gno"));
 			}
 			else{
 				stmt = con.prepareStatement("SELECT gno FROM groupe WHERE nom = ? or nom = ?");
@@ -50,7 +61,7 @@ public class GetCurrentGroup extends HttpServlet{
 				}
 			}
 			
-			if(next_function != null && next_function.equals("delete_group"))
+			if(deleteMode)
 				res.sendRedirect("DeleteGroup");
 		} catch (Exception e) {
 			res.getWriter().println(e);
