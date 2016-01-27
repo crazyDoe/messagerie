@@ -46,4 +46,8 @@ public class AddAjax extends HttpServlet{
 			tools.close();
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f8ae475f0150127be8acb5b484c38cd082e56a98
