@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import model.BDDTools;
 
-
 @WebServlet("/servlet/DeleteGroup")
 public class DeleteGroup extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -40,9 +39,7 @@ public class DeleteGroup extends HttpServlet{
 			stmt = con.prepareStatement("DELETE FROM CONTIENT WHERE id_groupe = ?"); // Supprime les appartenances
 			stmt.setInt(1, numGroupe);
 			stmt.executeUpdate();
-			
-			
-			
+						
 			stmt = con.prepareStatement("SELECT * FROM groupe WHERE nom = ?"); // test sur groupe de plusieurs personnes trouve
 			stmt.setString(1, nomGroupe);
 			rs = stmt.executeQuery();
