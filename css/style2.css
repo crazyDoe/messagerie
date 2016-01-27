@@ -1,6 +1,4 @@
 #main-wrapper{
-  margin: auto;
-  width: 1200px;
   background: #D3D3D3 ;
 }
 
@@ -90,7 +88,7 @@ body{
   vertical-align: bottom;
   font-size: 15px;
 }
-messages a:hover .mess{
+.messages a:hover .mess{
     background: rgba(0,0,0,.2);
 }
 

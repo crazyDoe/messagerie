@@ -29,11 +29,11 @@
               out.println("<a href='servlet/GetCurrentGroup?next_function=delete_group&group_name=" + s + "' class='fa fa-times-circle' style='color: red'> </a>");
         %> </td>
 
-          &nbsp; &nbsp; 
+          &nbsp; &nbsp;
 
         </tr> <%
 		}
- %> </table> 
+ %> </table>
 <% } %>
   </h4>
 </div>

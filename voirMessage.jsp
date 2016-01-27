@@ -10,11 +10,11 @@
   <body>
     <% BDDTools tools = new BDDTools(request,response);
     Connection con = null;
-    ResultSet rs,rsA,rsB;
+    ResultSet rs,rsA,rsB,rsNbMess;
     con = tools.getConnect(); %>
     <%@ include file="header.jsp"%>
     <div class="row" id="menu1">
-      <div class="col-md-10">
+      <div class="col-md-10 col-sm-12 col-xs-12">
         <div class="messages col-md-9">
           <%
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM message WHERE gno IN (SELECT id_groupe FROM contient WHERE pseudo= ?) GROUP BY gno ORDER BY date DESC");
@@ -33,10 +33,11 @@
                 if (rsA.next())
                 {
                   if(compteur == 1)
-                  { %>
-                  <a href=chat.jsp?group_name=<%=rsA.getString("pseudo")%> />
+                  {
+                    %>
+                  <a class="lienUser" href="" onclick="updateNotif();"/>
                     <div class="row mess">
-                      <img class=avatar-message src=img/<%= rsA.getString("pseudo") %>Avatar.png alt=Avatar Utilisateur>
+                      <img class=avatar-message src=img/<%= rsA.getString("pseudo") %>Avatar.png alt=Avatar Utilisateur/>
                         <h4 class="pseudo-message"> <%= rsA.getString("pseudo") %> : </h4>
                         <p class="text-message"><%= rs.getString("message") %><p>
                     </div>
@@ -49,8 +50,8 @@
                     rsB = stmt.executeQuery();
                     if(rsB.next())
                      {
-                       String nomGroupe = rsB.getString("nom"); %>
-                       <a href=chat.jsp?group_name=<%=rsB.getString("nom")%> />
+                     %>
+                       <a class="lienUser" href=chat.jsp?group_name=<%=rsB.getString("nom")%> />
                          <div class="row mess">
                            <img class=avatar-message src=img/defaultAvatar.png alt=Avatar Utilisateur>
                              <h4 class="pseudo-message"> <%= rsB.getString("nom") %> : </h4>
@@ -70,3 +71,15 @@
   </body>
   <%@ include file="footer.html"%>
 </html>
+<script>
+$(".lienUser").click(function(){ // quand l'utilisateur clique dans la case
+  var data = $(this).children().children('h4').text();
+  $.ajax({
+       type: "GET",
+       url: "servlet/UpdateNotif?pseudo="+data,
+       success: function(details){
+         console.log("ok");
+   }
+    });
+})
+</script>
