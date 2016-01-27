@@ -131,3 +131,15 @@ body{
 .text-envoi {
   display: inline-block;
 }
+
+span .notifMess{
+  background-color:red;
+  color:white;
+  font-weight:bold;
+  border-radius:30px;
+  box-shadow:1px 1px 1px gray;
+  padding:2px 3px 2px 4px;
+  top: -6px;right:-6px;
+  font-size:1em;
+  text-align: right;
+}
