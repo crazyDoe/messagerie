@@ -57,9 +57,10 @@ public class DeleteGroup extends HttpServlet{
 				stmt.setString(1, nomGroupe+""+pseudo);
 				stmt.setString(2, pseudo+""+nomGroupe);
 				rs = stmt.executeQuery();
-				
+
 				if(rs.next()){ // si groupe de deux trouve
 					String tmp = rs.getString("nom").toLowerCase();
+					
 					stmt = con.prepareStatement("DELETE FROM CONTACT where pseudo_reception = ?"); // Supprime les contacts (=2)
 					stmt.setString(1, tmp.replace(pseudo.toLowerCase(), ""));
 					stmt.executeUpdate();
