@@ -1,11 +1,13 @@
-<div id="main-wrapper" class="container">
+<div class="container" id="main-wrapper">
   <div class="row">
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
            <a class="navbar-brand" href="profil.jsp">${sessionScope.pseudo}</a>
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false"><i class="fa fa-bars"></i></button>
+
          </div>
-       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+       <div class=" navbar-collapse collapse" id="bs-example-navbar-collapse-9" aria-expanded="false">
         <ul class="nav navbar-nav" style="float : right">
           <li class="dropdown">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user">+</i>

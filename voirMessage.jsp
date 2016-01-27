@@ -14,7 +14,7 @@
     con = tools.getConnect(); %>
     <%@ include file="header.jsp"%>
     <div class="row" id="menu1">
-      <div class="col-md-10">
+      <div class="col-md-10 col-sm-12 col-xs-12">
         <div class="messages col-md-9">
           <%
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM message WHERE gno IN (SELECT id_groupe FROM contient WHERE pseudo= ?) GROUP BY gno ORDER BY date DESC");
