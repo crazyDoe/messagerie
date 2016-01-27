@@ -1,8 +1,8 @@
 <script>
-        $.ajax({
-           type: "GET",
-           url: "servlet/SelectContact",
-        });
+  $.ajax({
+    type: "GET",
+    url: "servlet/SelectContact",
+  });
 </script>
 
 
