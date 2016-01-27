@@ -45,7 +45,7 @@ body{
   overflow:auto;
   border-left: 1px solid black;
   height: 100%;
-  text-align: right;
+  text-align: left;
   padding: 0px;
 }
 
@@ -55,15 +55,6 @@ body{
 }
 #menu1{
   height: 900px;
-}
-
-.contact{
-  padding-top: 5px;
-}
-
-.maListe{
-  padding-bottom: 12px;
-  border-bottom: 1px solid black;
 }
 
 .messages{
@@ -132,14 +123,6 @@ body{
   display: inline-block;
 }
 
-span .notifMess{
-  background-color:red;
-  color:white;
-  font-weight:bold;
-  border-radius:30px;
-  box-shadow:1px 1px 1px gray;
-  padding:2px 3px 2px 4px;
-  top: -6px;right:-6px;
-  font-size:1em;
-  text-align: right;
+table tr td{
+  padding: 5px;
 }

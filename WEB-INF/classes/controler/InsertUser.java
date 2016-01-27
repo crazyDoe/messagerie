@@ -1,4 +1,4 @@
-package main;
+package controler;
 // Servlet Test.java  de test de la configuration
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import outils.BDDTools;
+import model.BDDTools;
+
 
 @WebServlet("/servlet/InsertUser")
 public class InsertUser extends HttpServlet{

@@ -1,4 +1,4 @@
-package main;
+package controler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import outils.BDDTools;
+import model.BDDTools;
+
 
 @WebServlet("/servlet/AddAjax")
 public class AddAjax extends HttpServlet{

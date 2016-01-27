@@ -1,4 +1,4 @@
-package main;
+package controler;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import outils.BDDTools;
+import model.BDDTools;
+
 
 @WebServlet("/servlet/AddMessage")
 public class AddMessage extends HttpServlet{
@@ -30,10 +31,10 @@ public class AddMessage extends HttpServlet{
 			String pseudo = "" + session.getAttribute("pseudo");
 			String message = "" + req.getParameter("message");
 			String date = new SimpleDateFormat("dd MMMM yyyy - HH:mm", Locale.FRANCE).format(new Date());
-			
+						
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO MESSAGE VALUES(null, ?, ?, ?, ?, ?)");
 			stmt.setString(1, pseudo);
-			stmt.setInt(2, Integer.parseInt((String) session.getAttribute("groupe")));
+			stmt.setInt(2, (int)session.getAttribute("numGroupe"));
 			stmt.setString(3, message);
 			stmt.setString(4, date);
 			stmt.setInt(5, 0);

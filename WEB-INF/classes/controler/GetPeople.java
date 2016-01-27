@@ -1,6 +1,6 @@
-package main;
-// Servlet Test.java  de test de la configuration
+package controler;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,37 +12,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import outils.BDDTools;
+import model.BDDTools;
 
-@WebServlet("/servlet/LoginTreatment")
-public class LoginTreatment extends HttpServlet{
+
+@WebServlet("/servlet/GetPeople")
+public class GetPeople extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
 		BDDTools tools = new BDDTools(req,res);
 		Connection con = null;
 		ResultSet rs;
+		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
-		
+
+		String pseudo = (String) session.getAttribute("pseudo");
+
 		try {
 			con = tools.getConnect();
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM personne WHERE pseudo=? AND mdp = ?");
-			String nomSaisi = req.getParameter("login");
-			stmt.setString(1, nomSaisi);
-			stmt.setString(2, req.getParameter("mdp"));
+			PreparedStatement stmt = con.prepareStatement("select pseudo FROM personne WHERE pseudo <> ?");
+			
+			stmt.setString(1, pseudo);
 			rs = stmt.executeQuery();
-			if(rs.next())
-			{
-				session.setAttribute("pseudo", nomSaisi);
-				res.sendRedirect("SelectContact");
-			}
-			else{
-				session.setAttribute("erreur","Mauvais Identifiants");
-				res.sendRedirect(req.getContextPath() + "/login.jsp");
-			}
+			while(rs.next())
+				out.println(rs.getString("pseudo"));
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
+				e.printStackTrace();
+			}
 		finally{
 			tools.close();
 		}
