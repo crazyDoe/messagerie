@@ -124,3 +124,7 @@ body{
 table tr td{
   padding: 5px;
 }
+
+.error-form{
+  background:rgba(230,0,0,0.5);
+}

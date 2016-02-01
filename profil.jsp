@@ -14,7 +14,8 @@
     <%@ include file="header.jsp" %>
     <div class="row" id="menu1">
       <div class="col-md-10">
-        <h2> Bienvenue <%= pseudo %></h2>
+        <h1> Bienvenue <%= pseudo %></h1>
+        <h2> Modification du Profil </h2>
         <form method="POST" action="servlet/UploadImage" enctype="multipart/form-data"  >
           <div class="form-group">
             <%

@@ -36,6 +36,7 @@
            url: "servlet/NotifMessage",
            success: function(details){
           $('#notifM').html(details);
+          //setTimeout(($('#notifM').html("h")),5000);
        }
         });
   }

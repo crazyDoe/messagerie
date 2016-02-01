@@ -13,7 +13,7 @@
          <form action='servlet/AddContact' method='get' role="form" >
            <div class="form-group">
              <div class="row">
-               <label class="control-label" for="Nom du groupe">Nom du groupe: </label><input type="text" name="nomGroupe" id="nomGroupe"> <br />
+               <label class="control-label" for="nomGroupe">Nom du groupe: </label><input type="text" name="nomGroupe" id="nomGroupe"> <br />
                <span class="" style="">X</span>
             </div>
           </div>
@@ -22,7 +22,7 @@
          </form>
      </div>
      <div class="col-md-4">
-       <img src="img/chat.png" style="margin-left:100px;margin-bottom:70px;">
+       <img src="img/pinT.png" style="margin-left:100px;margin-bottom:70px;">
      </div>
 
    </div>
