@@ -25,13 +25,13 @@
 							<h3 class="panel-title">Restez en contact avec vos amis partout dans le monde !!!!</h3>
 						</div>
 						<div class="panel-body">
-							<form action ='servlet/LoginTreatment' method='POST'>
+							<form action ='j_security_check' method='POST'>
 								<fieldset>
 								<div class="form-group">
-									<input class="form-control" placeholder="Login" name="login" autofocus="" type="text">
+									<input class="form-control" placeholder="Login" name="j_username" autofocus="" type="text">
 								</div>
 								<div class="form-group">
-									<input class="form-control" placeholder="Password" name="mdp" value="" type="password">
+									<input class="form-control" placeholder="Password" name="j_password" value="" type="password">
 								</div>
 								<input type='submit' value='Valider' class='btn btn-lg btn-success btn-block'>
 								<a href="addUser.jsp" class="btn btn-outline btn-primary btn-lg btn-block"> S'inscrire </a>

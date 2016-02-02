@@ -1,1 +1,16 @@
-<Context path="/messagerie" privileged="true" reloadable="true" />
+<?xml version="1.0" encoding="UTF-8"?>
+<Context debug="99" path="/messagerie">
+  <!-- Definition du pool -->
+  <Resource auth="Container" driverClassName="org.sqlite.JDBC" maxActive="8" maxIdle="4" maxWait="10000" name="da2i"  type="javax.sql.DataSource" url="jdbc:sqlite:/home/infoetu/mahioutm/Bureau/tomcat/webapps/messagerie/bdd/messagerie.db" />
+  
+  <!-- Definition du Realm via le pool -->
+
+   <Realm  className="org.apache.catalina.realm.DataSourceRealm" debug="99"
+           dataSourceName="da2i" localDataSource="true"
+           
+           userTable="personne" userNameCol="pseudo" userCredCol="mdp"
+           userRoleTable="personne_role" roleNameCol="personne_role"/>
+
+  <!-- Definition d'une valve d'acces -->
+  <Valve className="org.apache.catalina.valves.AccessLogValve" pattern="common" prefix="projet_bdd_access." suffix=".txt"/>
+</Context>

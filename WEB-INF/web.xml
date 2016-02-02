@@ -1,28 +1,71 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-  version="3.1">
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-<!--
-    <servlet>
-        <servlet-name>Test</servlet-name>
-        <servlet-class>Test</servlet-class>
-    </servlet>
 
-    <servlet-mapping>
-        <servlet-name>Test</servlet-name>
-        <url-pattern>/servlet/Test</url-pattern>
-    </servlet-mapping>
--->
+    <!-- Parametrages propres a cette application web -->
+    <context-param>
+        <description>Constantes de l'appli. Accessibles par getServletContext().getInitParameter("name"); ou dans une JSP par application.getInitParameter("name");</description>
+        <param-name>concepteur</param-name>
+        <param-value>Philippe MATHIEU, LP DA2I</param-value>
+   </context-param>
+    
 
+    <!-- Vie de la session en minutes -->
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>1</session-timeout>
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>profil.jsp</welcome-file>
     </welcome-file-list>
+
+
+    <!--       Recuperation des erreurs      -->
+    <!-- A commenter lors des mises au point 
+    <error-page>
+        <error-code>403</error-code>
+        <location>/erreur.jsp?message=Cette page ne vous est pas accessible</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/erreur.jsp?message=Page inexistante</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/erreur.jsp?message=BDD ou Beans inaccessibles</location>
+    </error-page>
+-->
+
+
+    <!--  Lien entre les pages et les roles -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Administrateur</web-resource-name>
+            <url-pattern>*.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>role1</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    
+
+
+    <!-- La maniere dont la page de login est affichee -->
+    <login-config>
+<auth-method>FORM</auth-method>
+<form-login-config>
+<form-login-page>/login.jsp</form-login-page>
+<form-error-page>/error.html</form-error-page>
+</form-login-config>
+</login-config> 
+
+
+    <!-- La liste des differents roles -->
+    <security-role>
+        <role-name>role1</role-name>
+    </security-role>
+    
 
 </web-app>
