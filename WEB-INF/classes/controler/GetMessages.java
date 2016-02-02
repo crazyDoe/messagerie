@@ -1,5 +1,4 @@
-package main;
-// Servlet Test.java  de test de la configuration
+package controler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -12,10 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import outils.BDDTools;
+import model.BDDTools;
 
-@WebServlet("/servlet/AddAjax")
-public class AddAjax extends HttpServlet{
+
+@WebServlet("/servlet/GetMessages")
+public class GetMessages extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
@@ -26,16 +26,20 @@ public class AddAjax extends HttpServlet{
 
 		try {
 			con = tools.getConnect();
-			PreparedStatement stmt = con.prepareStatement("select pseudo FROM personne WHERE pseudo LIKE '"+req.getParameter("name")+"%';");
-			rs = stmt.executeQuery();
-			while(rs.next())
-			{
-				out.println(rs.getString("pseudo"));
+			PreparedStatement stmt = con.prepareStatement("select date, pno, message FROM message where gno = ?");
+			
+			String groupe = "" + req.getSession().getAttribute("numGroupe");
+			
+			if(groupe != null){
+				stmt.setInt(1, Integer.parseInt(groupe));
+				rs = stmt.executeQuery();
+			
+				while(rs.next())
+					out.println(rs.getString("date") + " - " + rs.getString("pno") + " : " + rs.getString("message"));
 			}
-			con.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		}
+		catch (Exception e) {
+				e.printStackTrace();
 		}
 		finally{
 			tools.close();

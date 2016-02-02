@@ -1,4 +1,4 @@
-package main;
+package controler;
 // Servlet Test.java  de test de la configuration
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import outils.BDDTools;
+import model.BDDTools;
+
 
 @WebServlet("/servlet/SelectContact")
 public class SelectContact extends HttpServlet{
@@ -27,26 +28,28 @@ public class SelectContact extends HttpServlet{
 		HttpSession session = req.getSession();
 
 		try {
-		con = tools.getConnect();
+			con = tools.getConnect();
 			List<String> liste = new LinkedList<String>();
-      String nomSaisi = (String)session.getAttribute("pseudo");
-			// select a vers b
-			PreparedStatement stmt = con.prepareStatement("SELECT pseudo_reception FROM contact where pseudo_ajout = ?");
-			stmt.setString(1, nomSaisi);
+			String pseudo = (String)session.getAttribute("pseudo");
+			
+			PreparedStatement stmt = con.prepareStatement("SELECT pseudo_reception FROM contact "
+					+ "where pseudo_ajout = ?");
+			stmt.setString(1, pseudo);
 			rs = stmt.executeQuery();
-
+			
 			while(rs.next())
 				liste.add(rs.getString("pseudo_reception"));
 
-				// select b vers a
-				stmt = con.prepareStatement("SELECT pseudo_ajout FROM contact where pseudo_reception = ?");
-				stmt.setString(1, nomSaisi);
-				rs = stmt.executeQuery();
-
-				while(rs.next())
-					liste.add(rs.getString("pseudo_ajout"));
-			req.getSession().setAttribute("contacts", liste);
-			session.setAttribute("pseudo", nomSaisi);
+			stmt = con.prepareStatement("SELECT pseudo_ajout FROM contact "
+						+ "where pseudo_reception = ?");
+			stmt.setString(1, pseudo);
+			rs = stmt.executeQuery();
+	
+			while(rs.next())
+				liste.add(rs.getString("pseudo_ajout"));
+			
+			session.setAttribute("contacts", liste);
+			session.setAttribute("pseudo", pseudo);
 			res.sendRedirect(req.getContextPath() + "/profil.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();

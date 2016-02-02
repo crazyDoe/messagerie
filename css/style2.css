@@ -1,11 +1,9 @@
 #main-wrapper{
-  margin: auto;
-  width: 1000px;
-  background: #B09F91 ;
+  background: #D3D3D3 ;
 }
 
 body{
-  background : #5EB6DD;
+  background : #87CEFA;
 }
 
 #headerM{
@@ -14,8 +12,9 @@ body{
 }
 
 #container{
-	margin: 0 15px 0;
+  margin: 0 15px 0;
   margin-right: 0px;
+  height: 100%;
 }
 .navbar{
   margin-bottom: 0px;
@@ -39,10 +38,12 @@ body{
 
 
 .listeContacts {
-  background-color: #e8d2de;
+  background-color: #D3D3D3;
+  color: #101010;
   overflow:auto;
+  border-left: 1px solid black;
   height: 100%;
-  text-align: right;
+  text-align: left;
   padding: 0px;
 }
 
@@ -54,19 +55,12 @@ body{
   height: 900px;
 }
 
-.contact{
-  padding-top: 5px;
-}
-
-.maListe{
-  border-bottom: 1px solid black;
-}
-
 .messages{
   margin-top: 30px;
   height: 550px;
-  width: 800px;
-  background-color: #f5f5d5;
+  width: 900px;
+  margin-left: 40px;
+  background-color: #ffffff;
   overflow: scroll;
 }
 
@@ -94,7 +88,6 @@ body{
   vertical-align: bottom;
   font-size: 15px;
 }
-
 .messages a:hover .mess{
     background: rgba(0,0,0,.2);
 }
@@ -105,4 +98,33 @@ body{
 
 .messages a .mess{
     color : black;
+}
+
+.recu{
+  margin: 20px;
+}
+
+.discu-avatar{
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 30px;
+  border-radius: 20px;
+}
+.text-recu {
+  display: inline-block;
+  overflow: scroll;
+  height: 400px;
+  width: 670px;
+  background-color: white;
+}
+.text-envoi {
+  display: inline-block;
+}
+
+table tr td{
+  padding: 5px;
+}
+
+.error-form{
+  background:rgba(230,0,0,0.5);
 }

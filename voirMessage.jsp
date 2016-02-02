@@ -1,4 +1,5 @@
-<%@ page import="java.util.List, java.io.File" %>
+<%@ page import="java.util.List, java.io.File, java.sql.*" %>
+<%@ page import="model.BDDTools" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,89 +8,78 @@
     <title>Messages</title>
   </head>
   <body>
-    <%! String test = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? "; %>
+    <% BDDTools tools = new BDDTools(request,response);
+    Connection con = null;
+    ResultSet rs,rsA,rsB,rsNbMess;
+    con = tools.getConnect(); %>
     <%@ include file="header.jsp"%>
     <div class="row" id="menu1">
-      <div class="col-md-10">
+      <div class="col-md-10 col-sm-12 col-xs-12">
         <div class="messages col-md-9">
-          <a href="">
-            <div class="row mess">
-              <img class="avatar-message" src="img/defaultAvatar.png" alt="Avatar Utilisateur">
-                <h4 class="pseudo-message"> Test : </h4>
-                <p class="text-message"><% out.println(test.substring(0,80)+" ...");%><p>
-            </div>
-          </a>
-          <a href="">
-            <div class="row mess">
-              <img class="avatar-message" src="img/bobAvatar.png" alt="Avatar Utilisateur">
-                <h4 class="pseudo-message"> Bob : </h4>
-                <p class="text-message"><% out.println(test.substring(0,80)+" ...");%><p>
-            </div>
-          </a>
-          <a href="">
-            <div class="row mess">
-              <img class="avatar-message" src="img/bicheAvatar.png" alt="Avatar Utilisateur">
-                <h4 class="pseudo-message"> Biche :</h4>
-                <p class="text-message"><% out.println(test.substring(0,80)+" ...");%><p>
-            </div>
-          </a>
-          <a href="">
-            <div class="row mess">
-              <img class="avatar-message" src="img/zighmaAvatar.png" alt="Avatar Utilisateur">
-                <h4 class="pseudo-message"> Zighma :</h4>
-                <p class="text-message"><% out.println(test.substring(0,80)+" ...");%><p>
-            </div>
-          </a>
-          <a href="">
-            <div class="row mess">
-              <img class="avatar-message" src="img/maximeAvatar.png" alt="Avatar Utilisateur">
-                <h4 class="pseudo-message"> Maxime :  </h4>
-                <p class="text-message"><% out.println(test.substring(0,80)+" ...");%><p>
-            </div>
-          </a>
-          <a href="">
-            <div class="row mess">
-              <img class="avatar-message" src="img/pommeAvatar.png" alt="Avatar Utilisateur">
-                <h4 class="pseudo-message"> Pomme :  </h4>
-                <p class="text-message"><% out.println(test.substring(0,80)+" ...");%><p>
-            </div>
-          </a>
-          <a href="">
-            <div class="row mess">
-              <img class="avatar-message" src="img/poireAvatar.png" alt="Avatar Utilisateur">
-                <h4 class="pseudo-message"> Poire : </h4>
-                <p class="text-message"><% out.println(test.substring(0,80)+" ...");%><p>
-            </div>
-          </a>
-            <a href="">
-            <div class="row mess">
-              <img class="avatar-message" src="img/bryanAvatar.png" alt="Avatar Utilisateur">
-                <h4 class="pseudo-message"> Bryan : </h4>
-                <p class="text-message"><% out.println(test.substring(0,80)+" ...");%><p>
-            </div>
-          </a>
+          <%
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM message WHERE gno IN (SELECT id_groupe FROM contient WHERE pseudo= ?) GROUP BY gno ORDER BY date DESC");
+
+            stmt.setString(1,(String)request.getSession().getAttribute("pseudo"));
+            rs = stmt.executeQuery();
+              while(rs.next()){
+                // Si Groupe de 2
+                stmt = con.prepareStatement("SELECT pseudo FROM contient WHERE id_groupe = ? AND pseudo <> ? ");
+                stmt.setInt(1,rs.getInt("gno"));
+                stmt.setString(2,(String)request.getSession().getAttribute("pseudo"));
+                rsA = stmt.executeQuery();
+                Integer compteur = 0;
+                while (rsA.next()){compteur++;}
+                rsA = stmt.executeQuery();
+                if (rsA.next())
+                {
+                  if(compteur == 1)
+                  {
+                    %>
+                  <a class="lienUser" href="" onclick="updateNotif();"/>
+                    <div class="row mess">
+                      <img class=avatar-message src=img/<%= rsA.getString("pseudo") %>Avatar.png alt=Avatar Utilisateur/>
+                        <h4 class="pseudo-message"> <%= rsA.getString("pseudo") %> : </h4>
+                        <p class="text-message"><%= rs.getString("message") %><p>
+                    </div>
+                  </a>
+                  <% }
+                  // Si Groupe de plus de 2 personnes
+                  else{
+                    stmt = con.prepareStatement("SELECT nom FROM groupe WHERE gno = ?");
+                    stmt.setInt(1,rs.getInt("gno"));
+                    rsB = stmt.executeQuery();
+                    if(rsB.next())
+                     {
+                     %>
+                       <a class="lienUser" href=chat.jsp?group_name=<%=rsB.getString("nom")%> />
+                         <div class="row mess">
+                           <img class=avatar-message src=img/defaultAvatar.png alt=Avatar Utilisateur>
+                             <h4 class="pseudo-message"> <%= rsB.getString("nom") %> : </h4>
+                             <p class="text-message"><%= rs.getString("message") %><p>
+                         </div>
+                       </a>
+                    <% } %> <!-- Fermeture If rsB -->
+                  <% } %><!-- Fermeture If else -->
+                <% } %> <!-- Fermeture If rsA -->
+              <% } %> <!-- Fermeture W -->
         </div>
       </div>
-      <div class="col-md-2 listeContacts">
-          <h2> Contacts </h2>
-        <h4>
-          <%
-             List<String> contacts = (List<String>)session.getAttribute("contacts");
-             if(contacts != null){
-               out.println("<ul>");
-              for(String s : contacts){
-                if (new File(request.getServletContext().getRealPath("/") + "img/" + s + "Avatar.png").exists())
-                  out.println("<li class='maListe'><a href=''><span class='contact'>"+s +"&nbsp <img class='petitAvatar' src='img/" + s + "Avatar.png'></span><br /></li></a>&nbsp");
-                else
-                  out.println("<li class ='maListe'><a href=''><span class='contact'>"+s +"&nbsp <img class='petitAvatar' src='img/defaultAvatar.png'></span><br /></li></a>&nbsp");
-              }
-              out.println("</ul>");
-            }
-          %>
-        </h4>
-      </div>
+      <% tools.close();%>
+      <%@ include file="listeContacts.jsp" %>
 
     </div>
   </body>
   <%@ include file="footer.html"%>
 </html>
+<script>
+$(".lienUser").click(function(){ // quand l'utilisateur clique dans la case
+  var data = $(this).children().children('h4').text();
+  $.ajax({
+       type: "GET",
+       url: "servlet/UpdateNotif?pseudo="+data,
+       success: function(details){
+         console.log("ok");
+   }
+    });
+})
+</script>
