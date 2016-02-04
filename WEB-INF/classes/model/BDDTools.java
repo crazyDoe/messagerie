@@ -1,7 +1,6 @@
 package model;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -11,8 +10,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 public class BDDTools {
 	private Connection con = null;
@@ -30,9 +33,14 @@ public class BDDTools {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:../webapps/messagerie/bdd/messagerie.db");
+
+			Context initCtx = new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			DataSource ds = (DataSource) envCtx.lookup("pool");
+			con = ds.getConnection();
+			
 		}
-		catch (ClassNotFoundException | SQLException e ) {
+		catch (ClassNotFoundException | SQLException | NamingException e ) {
 			e.printStackTrace();
 		}
 	}

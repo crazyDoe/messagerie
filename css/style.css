@@ -61,8 +61,8 @@ body{
 
 .messages{
   margin-top: 30px;
-  height: 450px;
-  width: auto;
+  height: 550px;
+  width: 900px;
   margin-left: 40px;
   background-color: #ffffff;
   overflow: scroll;
@@ -75,11 +75,10 @@ body{
 }
 
 .avatar-message{
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 70px;
   margin: 5px;
   display: inline-block;
-  border-radius: 50px;
 }
 
 .pseudo-message{
@@ -132,46 +131,4 @@ table tr td{
 
 .error-form{
   background:rgba(230,0,0,0.5);
-}
-
-.chat li{
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-}
-
-.chat-panel .panel-body {
-    height: 500px;
-    overflow-y: scroll;
-}
-
-.chat li .chat-body p {
-    margin: 0;
-}
-
-.chat {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.MessCourant{
-  background-color: #02D148;
-  padding: 6px;
-  color : white;
-  font-size: 16px;
-  border-radius: 5px;
-  max-width: 220px;
-}
-
-.MessRecu{
-  background-color: #E5E5EA;
-  padding: 6px;
-  color : black;
-  font-size: 16px;
-  border-radius: 5px;
-  max-width: 220px;
-}
-
-.chatBox{
-  padding: 30px;
 }

@@ -20,9 +20,9 @@
               </li>
             </ul>
           </li>
-          <li class="dropdown"> <a href="modifProfil.jsp"><i class="fa fa-gear"></i></a></li>
-          <li class="dropdown"> <a href="voirMessage.jsp"><i class="fa fa-envelope"></i></a></li>
-          <li class="dropdown"> <a href="servlet/Deconnect"><i class="fa fa-power-off"></i></a></li>
+          <li class="dropdown"> <a href="voirMessage.jsp"><i class="fa fa-envelope"></i> <span id="notifM" ></span></a></li>
+          <li class="dropdown"> <a href="#"><i class="fa fa-bell"></i></a></li>
+          <li class="dropdown"> <a href="../servlet/Deconnect"><i class="fa fa-power-off"></i></a></li>
         </ul>
         </div>
       </div>

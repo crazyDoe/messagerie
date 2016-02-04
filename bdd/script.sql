@@ -2,11 +2,13 @@ drop table if exists contact;
 drop table if exists contient;
 drop table if exists message;
 drop table if exists groupe;
+drop table if exists personne_role;
 drop table if exists personne;
 
 create table personne(
 	pseudo text,
 	mdp text,
+	role text not null default 'default',
 
 	constraint pk_personne primary key(pseudo)
 );
@@ -46,9 +48,9 @@ create table contient(
 	constraint fk_contient2 foreign key(pseudo) references personne(pseudo)
 );
 
-INSERT INTO personne VALUES ('biche','123456');
-INSERT INTO personne VALUES ('zepellin','123123');
-INSERT INTO personne VALUES ('admin','admin');
-INSERT INTO personne VALUES ('thor','jamesbond');
-INSERT INTO personne VALUES ('bryan','123456');
-INSERT INTO personne VALUES ('bob','marteau');
+INSERT INTO personne(pseudo, mdp) VALUES ('biche','123456');
+INSERT INTO personne(pseudo, mdp) VALUES ('zepellin','123123');
+INSERT INTO personne(pseudo, mdp) VALUES ('admin','admin');
+INSERT INTO personne(pseudo, mdp) VALUES ('thor','jamesbond');
+INSERT INTO personne(pseudo, mdp) VALUES ('bryan','123456');
+INSERT INTO personne(pseudo, mdp) VALUES ('bob','marteau');
