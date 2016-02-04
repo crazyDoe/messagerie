@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%@ include file="head.html"%>
+    <%@ include file="../head.html"%>
     <meta charset="utf-8">
     <title>Messages</title>
   </head>
@@ -69,7 +69,7 @@
 
     </div>
   </body>
-  <%@ include file="footer.html"%>
+  <%@ include file="../footer.html"%>
 </html>
 <script>
 $(".lienUser").click(function(){ // quand l'utilisateur clique dans la case

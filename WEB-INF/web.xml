@@ -2,21 +2,14 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 
-    <!-- Parametrages propres a cette application web -->
-    <context-param>
-        <description>Constantes de l'appli. Accessibles par getServletContext().getInitParameter("name"); ou dans une JSP par application.getInitParameter("name");</description>
-        <param-name>concepteur</param-name>
-        <param-value>Philippe MATHIEU, LP DA2I</param-value>
-   </context-param>
-    
-
     <!-- Vie de la session en minutes -->
     <session-config>
         <session-timeout>1</session-timeout>
     </session-config>
 
+
     <welcome-file-list>
-        <welcome-file>profil.jsp</welcome-file>
+        <welcome-file>/jsp/profil.jsp</welcome-file>
     </welcome-file-list>
 
 
@@ -36,15 +29,14 @@
     </error-page>
 -->
 
-
     <!--  Lien entre les pages et les roles -->
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Administrateur</web-resource-name>
-            <url-pattern>*.jsp</url-pattern>
+            <web-resource-name>default</web-resource-name>
+            <url-pattern>/jsp/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>role1</role-name>
+            <role-name>default</role-name>
         </auth-constraint>
     </security-constraint>
 
@@ -54,18 +46,18 @@
 
     <!-- La maniere dont la page de login est affichee -->
     <login-config>
-<auth-method>FORM</auth-method>
-<form-login-config>
-<form-login-page>/login.jsp</form-login-page>
-<form-error-page>/error.html</form-error-page>
-</form-login-config>
-</login-config> 
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/error.html</form-error-page>
+        </form-login-config>
+    </login-config>
 
 
     <!-- La liste des differents roles -->
     <security-role>
-        <role-name>role1</role-name>
+        <role-name>default</role-name>
     </security-role>
-    
+
 
 </web-app>

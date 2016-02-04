@@ -9,9 +9,9 @@
 <div class="col-md-2 listeContacts">
 	<% List<String> contacts = (List<String>)session.getAttribute("contacts"); %>
 
-  <h3> <center> Mes contacts (<%= contacts.size()%>)</center> </h3> <br />
   <h4>
 	<% if(contacts != null){ %>
+    <h3> <center> Mes contacts (<%= contacts.size()%>)</center> </h3> <br />
     <table> <%
 		for(String s : contacts){
       %> <tr>	<%

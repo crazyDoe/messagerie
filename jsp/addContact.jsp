@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%@ include file="head.html"%>
+    <%@ include file="../head.html"%>
     <meta charset="utf-8">
     <title>Search</title>
   </head>
@@ -11,7 +11,7 @@
     Nom : <input type="text" id="nom" name="pseudo"><BR>
     <div id="liste" style="height:200px"></div>
   </body>
-  <%@ include file="footer.html"%>
+  <%@ include file="../footer.html"%>
   <script>
 	$(document).ready(function(){
 		ajax();

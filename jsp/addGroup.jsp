@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%@ include file="head.html"%>
+    <%@ include file="../head.html"%>
     <meta charset="utf-8">
     <title>Search</title>
   </head>
@@ -22,12 +22,12 @@
          </form>
      </div>
      <div class="col-md-4">
-       <img src="img/pinT.png" style="margin-left:100px;margin-bottom:70px;">
+       <img src="../img/pinT.png" style="margin-left:100px;margin-bottom:70px;">
      </div>
 
    </div>
   </body>
-  <%@ include file="footer.html"%>
+  <%@ include file="../footer.html"%>
   <script>
   $("#nomGroupe").keypress(function() {
       var compteur = $(this).val().length;

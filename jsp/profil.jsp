@@ -5,12 +5,12 @@
   <head>
     <meta charset="utf-8">
     <title> Home </title>
-    <%@ include file="head.html"%>
+    <%@ include file="../head.html"%>
   </head>
   <body>
-    <% Object pseudo = session.getAttribute("pseudo");
-    if(pseudo == null)
-      response.sendRedirect("login.jsp"); %>
+    <%
+      session.setAttribute("pseudo", request.getRemoteUser()); 
+      Object pseudo = session.getAttribute("pseudo"); %>
     <%@ include file="header.jsp" %>
     <div class="row" id="menu1">
       <div class="col-md-10">
@@ -21,9 +21,9 @@
             <%
               if (new File(request.getServletContext().getRealPath("/") +
                 "img/" + pseudo + "Avatar.png").exists()){ %>
-                <img class="avatar" src="img/${sessionScope.pseudo}Avatar.png">
+                <img class="avatar" src="../img/${sessionScope.pseudo}Avatar.png">
             <% } else{ %>
-                <img class="avatar" src="img/defaultAvatar.png">
+                <img class="avatar" src="../img/defaultAvatar.png">
             <% } %>
           </div>
           <div class="form-group">
@@ -34,6 +34,6 @@
       </div>
       <%@ include file="listeContacts.jsp" %>
     </div> <!-- Fin de row -->
-    <%@ include file="footer.html"%>
+    <%@ include file="../footer.html"%>
   </body>
 </html>

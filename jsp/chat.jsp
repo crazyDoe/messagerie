@@ -5,16 +5,13 @@
   <head>
     <meta charset="utf-8">
     <title> Home </title>
-    <%@ include file="head.html"%>
+    <%@ include file="../head.html"%>
   </head>
   <body>
     <% Object pseudo = session.getAttribute("pseudo");
        Object group_name = request.getParameter("group_name");
 
-    session.setAttribute("group_name", group_name);
-
-    if(group_name == null)
-      response.sendRedirect("login.jsp"); %>
+    session.setAttribute("group_name", group_name); %>
     <%@ include file="header.jsp" %>
     <div class="row recu">
       <div class="col-md-10">
@@ -39,7 +36,7 @@
 		<input id="envoyer" type='submit' value='Envoyer' class='btn btn-lg btn-success btn-block'>
 	  </div>
 	</div>
-    <%@ include file="footer.html"%>
+    <%@ include file="../footer.html"%>
   </body>
 
   <script>
