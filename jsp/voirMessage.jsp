@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%@ include file="../head.html"%>
+    <%@ include file="head.html"%>
     <meta charset="utf-8">
     <title>Messages</title>
   </head>
@@ -15,6 +15,7 @@
     <%@ include file="header.jsp"%>
     <div class="row" id="menu1">
       <div class="col-md-10 col-sm-12 col-xs-12">
+        <h2 style='text-align:center'> -- Mes Messages -- </h2>
         <div class="messages col-md-9">
           <%
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM message WHERE gno IN (SELECT id_groupe FROM contient WHERE pseudo= ?) GROUP BY gno ORDER BY date DESC");
@@ -35,7 +36,7 @@
                   if(compteur == 1)
                   {
                     %>
-                  <a class="lienUser" href="" onclick="updateNotif();"/>
+                  <a class="lienUser" href=chat.jsp?group_name=<%=rsA.getString("pseudo")%> onclick="updateNotif();"/>
                     <div class="row mess">
                       <img class=avatar-message src=img/<%= rsA.getString("pseudo") %>Avatar.png alt=Avatar Utilisateur/>
                         <h4 class="pseudo-message"> <%= rsA.getString("pseudo") %> : </h4>
@@ -53,7 +54,7 @@
                      %>
                        <a class="lienUser" href=chat.jsp?group_name=<%=rsB.getString("nom")%> />
                          <div class="row mess">
-                           <img class=avatar-message src=img/defaultAvatar.png alt=Avatar Utilisateur>
+                           <img class=avatar-message src=img/defaultAvatar.png alt=AvatarUtilisateur>
                              <h4 class="pseudo-message"> <%= rsB.getString("nom") %> : </h4>
                              <p class="text-message"><%= rs.getString("message") %><p>
                          </div>
@@ -69,7 +70,7 @@
 
     </div>
   </body>
-  <%@ include file="../footer.html"%>
+  <%@ include file="footer.html"%>
 </html>
 <script>
 $(".lienUser").click(function(){ // quand l'utilisateur clique dans la case
