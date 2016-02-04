@@ -20,8 +20,8 @@
               </li>
             </ul>
           </li>
-          <li class="dropdown"> <a href="voirMessage.jsp"><i class="fa fa-envelope"></i> <span id="notifM" ></span></a></li>
-          <li class="dropdown"> <a href="#"><i class="fa fa-bell"></i></a></li>
+          <li class="dropdown"> <a href="modifProfil.jsp"><i class="fa fa-gear"></i></a></li>
+          <li class="dropdown"> <a href="voirMessage.jsp"><i class="fa fa-envelope"></i></a></li>
           <li class="dropdown"> <a href="../servlet/Deconnect"><i class="fa fa-power-off"></i></a></li>
         </ul>
         </div>
@@ -29,16 +29,16 @@
     </nav>
   </div>
   <script>
-  var req = new XMLHttpRequest();
+  /*var req = new XMLHttpRequest();
   function affiche() {
       $.ajax({
            type: "GET",
-           url: "servlet/NotifMessage",
+           url: "../servlet/NotifMessage",
            success: function(details){
-          $('#notifM').html(details);
+          //$('#notifM').html(details);
           //setTimeout(($('#notifM').html("h")),5000);
        }
         });
   }
-      setInterval(affiche,500);
+      setInterval(affiche,500); */
   </script>

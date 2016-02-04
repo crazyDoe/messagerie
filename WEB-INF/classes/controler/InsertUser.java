@@ -39,7 +39,7 @@ public class InsertUser extends HttpServlet{
 			if(mdp.equals(mdp2) && !rs.next())
 			{
 				session.setAttribute("pseudo", nomSaisi);
-				stmt = con.prepareStatement("INSERT INTO personne VALUES (?,?)");
+				stmt = con.prepareStatement("INSERT INTO personne(pseudo, mdp) VALUES (?,?)");
 				stmt.setString(1, nomSaisi);
 				stmt.setString(2, mdp);
 				stmt.executeUpdate();

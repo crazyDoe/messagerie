@@ -50,7 +50,7 @@ public class SelectContact extends HttpServlet{
 			
 			session.setAttribute("contacts", liste);
 			session.setAttribute("pseudo", pseudo);
-			res.sendRedirect(req.getContextPath() + "/profil.jsp");
+			res.sendRedirect("../jsp/profil.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

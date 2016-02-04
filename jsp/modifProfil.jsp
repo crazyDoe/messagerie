@@ -8,13 +8,11 @@
     <%@ include file="../head.html"%>
   </head>
   <body>
-    <% 
-    session.setAttribute("pseudo", request.getRemoteUser()); 
-    Object pseudo = session.getAttribute("pseudo"); %>
+    <% Object pseudo = session.getAttribute("pseudo"); %>
     <%@ include file="header.jsp" %>
     <div class="row" id="menu1">
       <div class="col-md-10">
-        <h1> Bienvenue <%= pseudo %></h1>
+        <h1> Modification du Profil </h1>
         <form method="POST" action="servlet/UploadImage" enctype="multipart/form-data"  >
           <div class="form-group">
             <%
@@ -25,6 +23,11 @@
                 <img class="avatar" src="../img/defaultAvatar.png">
             <% } %>
           </div>
+          <div class="form-group">
+            <input type="file" name="file" id="file" />
+          </div>
+          <input type="submit" value="Upload" name="upload" class="btn btn-primary btn-lg">
+        </form>
       </div>
       <%@ include file="listeContacts.jsp" %>
     </div> <!-- Fin de row -->

@@ -68,7 +68,7 @@ public class DeleteGroup extends HttpServlet{
 			stmt.setInt(1, numGroupe);
 			stmt.executeUpdate();
 				
-			res.sendRedirect("../profil.jsp");
+			res.sendRedirect("../jsp/profil.jsp");
 		} catch (Exception e) {
 			res.getWriter().println(e);
 		}

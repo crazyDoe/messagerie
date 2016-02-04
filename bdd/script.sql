@@ -2,7 +2,6 @@ drop table if exists contact;
 drop table if exists contient;
 drop table if exists message;
 drop table if exists groupe;
-drop table if exists personne_role;
 drop table if exists personne;
 
 create table personne(

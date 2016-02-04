@@ -32,15 +32,12 @@ public class BDDTools {
 		} */
 
 		try {
-			Class.forName("org.sqlite.JDBC");
-
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 			DataSource ds = (DataSource) envCtx.lookup("pool");
 			con = ds.getConnection();
-			
 		}
-		catch (ClassNotFoundException | SQLException | NamingException e ) {
+		catch (SQLException | NamingException e ) {
 			e.printStackTrace();
 		}
 	}

@@ -8,35 +8,41 @@
     <%@ include file="../head.html"%>
   </head>
   <body>
-    <% Object pseudo = session.getAttribute("pseudo");
+    <%
        Object group_name = request.getParameter("group_name");
-
-    session.setAttribute("group_name", group_name); %>
+       session.setAttribute("group_name", group_name);
+    %>
     <%@ include file="header.jsp" %>
-    <div class="row recu">
-      <div class="col-md-10">
-        <% if (new File(request.getServletContext().getRealPath("/") + "img/" + group_name + "Avatar.png").exists()){ %>
-          <img class="moyenAvatar discu-avatar" src="img/${sessionScope.group_name}Avatar.png">
-        <% } else{ %>
-			<img class="moyenAvatar discu-avatar" src="img/defaultAvatar.png">
-        <% } %>
-        <div class="text-recu" id="recu" ></div>
-      </div>
+    <div class="row">
+      <div class="col-md-8 chatBox">
+        <div class="chat-panel panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-comments fa-fw"></i> Discussion
+          </div>
+          <div class="panel-body" id="boiteDialogue">
+            <ul class="chat">
+
+            </ul>
+          </div>
+          <div class="panel-footer">
+            <div class="input-group">
+              <input id="newMessage" type="text" class="form-control input-sm" placeholder="Type your message here...">
+              <span class="input-group-btn">
+                  <button class="btn btn-success btn-sm" id="envoyer">
+                                        Send
+                  </button>
+              </span>
+            </div>
+          </div>
+
+        </div>
+	  </div>
+    <div class="col-md-2">
     </div>
-    <div class="row recu">
-	  <div class="col-md-10">
-		  <% if (new File(request.getServletContext().getRealPath("/") + "img/" + pseudo + "Avatar.png").exists()){ %>
-                <img class="moyenAvatar discu-avatar" src="img/${sessionScope.pseudo}Avatar.png">
-          <% } else{ %>
-				<img class="moyenAvatar discu-avatar" src="img/defaultAvatar.png">
-          <% } %>
-          <TEXTAREA id="newMessage" class="text-envoi" ROWS=5 COLS=80></TEXTAREA>
-	  </div>
-	  <div class="col-md-2 hidden-sm-down">
-		<input id="envoyer" type='submit' value='Envoyer' class='btn btn-lg btn-success btn-block'>
-	  </div>
+    <%@ include file="listeContacts.jsp"%>
+  </div>
+          <%@ include file="../footer.html"%>
 	</div>
-    <%@ include file="../footer.html"%>
   </body>
 
   <script>
@@ -44,7 +50,7 @@
  		getCurrentGroup();
 		setInterval(function(){
 			getMessages();
-		}, 500);
+		}, 600);
     };
 	$('#envoyer').click(function(){
 		ajax();
@@ -58,7 +64,7 @@
   	function getCurrentGroup() {
         $.ajax({
            type: "GET",
-           url: "servlet/GetCurrentGroup",
+           url: "../servlet/GetCurrentGroup",
         });
     }
 
@@ -71,28 +77,12 @@
 	}
 
   	function ajax() {
+                      document.getElementById('boiteDialogue').scrollTop = document.getElementById('boiteDialogue').scrollHeight;
         $.ajax({
            type: "GET",
-           url: "servlet/AddMessage?message="+ escapeHtml($("#newMessage").val()),
+           url: "../servlet/AddMessage?message="+ escapeHtml($("#newMessage").val()),
            success: function(details){
-				// Update la zone de reception
-				var textSplitted = details.split(" ");
-				var text = "";
-
-				for (j = 0; j < textSplitted.length; j++){
-					if(j >= 0 && j <= 5)
-						text += "<span style='font-weight: bold'>" + textSplitted[j] + "</span> ";
-					else if(j == 6)
-						text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
-					else
-						text += "<span style='color: black'>" + textSplitted[j] + "</span> ";
-				}
-
-
-				$('#recu').append(text + "<br />");
-
-				// Clear la zone d'envoi
-				document.getElementById("newMessage").value='';
+				        document.getElementById("newMessage").value='';
 		   }
         });
     }
@@ -100,33 +90,10 @@
 	function getMessages() {
 	    $.ajax({
            type: "GET",
-           url: "servlet/GetMessages",
+           url: "../servlet/GetMessages",
            success: function(details){
-				var tab = details.split("\n");
-				var i, j;
-				var text = "";
-
-				/* nombre de lignes */
-				for (i = 0; i < tab.length; i++){
-					var textSplitted = tab[i].split(" ");
-
-
-					/* Split sur espace, par ligne */
-					for (j = 0; j < textSplitted.length; j++){
-						if(j >= 0 && j <= 5)
-							text += "<span style='font-weight: bold'>" + textSplitted[j] + "</span> ";
-						else if(j == 6)
-							text += "<span style='color: red'>" + textSplitted[j] + "</span> ";
-						else
-							text += "<span style='color: black'>" + textSplitted[j] + "</span> ";
-					}
-
-					if(i != tab.length-1)
-						text += "<br />";
-
-					$('#recu').html(text);
+	       $('.chat').html(details);
 				}
-		   }
         });
 	}
   </script>
