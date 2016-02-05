@@ -3,7 +3,7 @@
 }
 
 body{
-  background : #87CEFA;
+  background-image :url('bgblue.png');
 }
 
 #headerM{
@@ -58,7 +58,7 @@ body{
 .messages{
   margin-top: 30px;
   height: 450px;
-  width: auto;
+  width: 700px;
   margin-left: 40px;
   background-color: #ffffff;
   overflow: scroll;

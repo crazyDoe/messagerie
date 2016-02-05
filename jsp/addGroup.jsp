@@ -68,7 +68,7 @@
     					if (img.height != 0) // Si l'image existe
     						$('#liste').append("  <td><img class='petitAvatar discu-avatar' src="+url+"></td>");
     					else
-    						$('#liste').append(" <td> <img class='petitAvatar discu-avatar' src='img/defaultAvatar.png'></td>");
+    						$('#liste').append(" <td> <img class='petitAvatar discu-avatar' src='../img/defaultAvatar.png'></td>");
 
               $('#liste').append("<td> <input type='checkbox' name ='checkboxes' value='" + tab[i] +"'><br /><br /></td></tr></table>");
     				}
