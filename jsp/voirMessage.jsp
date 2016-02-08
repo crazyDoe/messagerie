@@ -28,19 +28,25 @@
                 stmt.setInt(1,rs.getInt("gno"));
                 stmt.setString(2,(String)request.getSession().getAttribute("pseudo"));
                 rsA = stmt.executeQuery();
-                Integer compteur = 0;
+                int compteur = 0;
                 while (rsA.next()){compteur++;}
                 rsA = stmt.executeQuery();
-                if (rsA.next())
-                {
-                  if(compteur == 1)
-                  {
-                    %>
+                
+                if (rsA.next()) {
+                  if(compteur == 1) { %>
                   <a class="lienUser" href=chat.jsp?group_name=<%=rsA.getString("pseudo")%> onclick="updateNotif();"/>
                     <div class="row mess">
                       <img class=avatar-message src=../img/<%= rsA.getString("pseudo") %>Avatar.png alt=Avatar Utilisateur/>
                         <h4 class="pseudo-message"> <%= rsA.getString("pseudo") %> : </h4>
-                        <p class="text-message"><%= rs.getString("message") %><p>
+                          <p class="text-message">
+
+                          <% String msg = rs.getString("message");
+
+                          if(msg.length() < 50)
+                            out.println(rs.getString("message"));
+                          else                   
+                            out.println(rs.getString("message").substring(0, 50)); 
+                          %> </p>
                     </div>
                   </a>
                   <% }
@@ -49,14 +55,21 @@
                     stmt = con.prepareStatement("SELECT nom FROM groupe WHERE gno = ?");
                     stmt.setInt(1,rs.getInt("gno"));
                     rsB = stmt.executeQuery();
-                    if(rsB.next())
-                     {
-                     %>
+                    if(rsB.next()) { %>
                        <a class="lienUser" href=chat.jsp?group_name=<%=rsB.getString("nom")%> />
                          <div class="row mess">
                            <img class=avatar-message src=../img/defaultAvatar.png alt=AvatarUtilisateur>
                              <h4 class="pseudo-message"> <%= rsB.getString("nom") %> : </h4>
-                             <p class="text-message"><%= rs.getString("message") %><p>
+
+                             <p class="text-message">
+
+                            <% String msg = rs.getString("message");
+
+                            if(msg.length() < 50)
+                              out.println(rs.getString("message"));
+                            else                    
+                              out.println(rs.getString("message").substring(0, 50)); 
+                            %> </p>
                          </div>
                        </a>
                     <% } %> <!-- Fermeture If rsB -->

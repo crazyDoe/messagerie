@@ -44,7 +44,7 @@ public class InsertUser extends HttpServlet{
 				stmt.setString(2, mdp);
 				stmt.executeUpdate();
 				session.setAttribute("erreur",null);
-				res.sendRedirect(req.getContextPath() + "/login.jsp");
+				res.sendRedirect(req.getContextPath() + "/jsp/profil.jsp");
 			}
 			else if(!mdp.equals(mdp2))
 			{

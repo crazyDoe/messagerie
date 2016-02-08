@@ -40,7 +40,7 @@
 									<div id="error-pwd"></div>
 								</div>
 								<input type='submit' value='Valider' class='btn btn-lg btn-success btn-block'>
-								<a href="login.jsp" class="btn btn-danger btn-lg btn-block"> Annuler </a>
+								<a href="jsp/profil.jsp" class="btn btn-danger btn-lg btn-block"> Annuler </a>
 								</fieldset>
 							</form>
 						</div>
