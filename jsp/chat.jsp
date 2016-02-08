@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
     <title> Home </title>
-    <%@ include file="../head.html"%>
+    <%@ include file="head.jsp"%>
+    <%@ page pageEncoding="utf-8" %>
   </head>
   <body>
     <%
@@ -17,7 +17,7 @@
       <div class="col-md-8 chatBox">
         <div class="chat-panel panel panel-default">
           <div class="panel-heading">
-            <i class="fa fa-comments fa-fw"></i> Discussion
+            <i class="fa fa-comments fa-fw"></i> Discussionéé
           </div>
           <div class="panel-body" id="boiteDialogue">
             <ul class="chat">
@@ -45,12 +45,12 @@
 	</div>
   </body>
 
-  <script>
+<script type="text/javascript">
     window.onload = function() {
  		getCurrentGroup();
 		setInterval(function(){
 			getMessages();
-		}, 600);
+		}, 300);
     };
 	$('#envoyer').click(function(){
 		ajax();
@@ -77,7 +77,6 @@
 	}
 
   	function ajax() {
-                      document.getElementById('boiteDialogue').scrollTop = document.getElementById('boiteDialogue').scrollHeight;
         $.ajax({
            type: "GET",
            url: "../servlet/AddMessage?message="+ escapeHtml($("#newMessage").val()),
@@ -95,6 +94,7 @@
 	       $('.chat').html(details);
 				}
         });
+              document.getElementById('boiteDialogue').scrollTop = document.getElementById('boiteDialogue').scrollHeight;
 	}
   </script>
 </html>

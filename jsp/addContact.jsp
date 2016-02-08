@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%@ include file="../head.html"%>
-    <meta charset="utf-8">
+    <%@ include file="head.jsp"%>
+    <%@ page pageEncoding="utf-8" %>
     <title>Search</title>
   </head>
   <body>

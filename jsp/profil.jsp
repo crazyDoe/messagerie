@@ -5,11 +5,12 @@
   <head>
     <meta charset="utf-8">
     <title> Home </title>
-    <%@ include file="../head.html"%>
+    <%@ include file="head.jsp"%>
+    <%@ page pageEncoding="utf-8" %>
   </head>
   <body>
-    <% 
-    session.setAttribute("pseudo", request.getRemoteUser()); 
+    <%
+    session.setAttribute("pseudo", request.getRemoteUser());
     Object pseudo = session.getAttribute("pseudo"); %>
     <%@ include file="header.jsp" %>
     <div class="row" id="menu1">

@@ -24,14 +24,14 @@ public class AddMessage extends HttpServlet{
 		BDDTools tools = new BDDTools(req,res);
 		Connection con = null;
 		HttpSession session = req.getSession();
-
+		req.setCharacterEncoding("UTF-8");
 		try {
 			con = tools.getConnect();
 
 			String pseudo = "" + session.getAttribute("pseudo");
 			String message = "" + req.getParameter("message");
 			String date = new SimpleDateFormat("dd MMMM yyyy - HH:mm", Locale.FRANCE).format(new Date());
-			
+
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO MESSAGE VALUES(null, ?, ?, ?, ?, ?)");
 			stmt.setString(1, pseudo);
 			stmt.setInt(2, (int)session.getAttribute("numGroupe"));

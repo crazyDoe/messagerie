@@ -6,7 +6,7 @@
 		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script src="../js/bootstrap.js"></script>
 
-		<meta charset="utf-8">
+		<%@ page pageEncoding="utf-8" %>
 		<title >Home </title>
 	</head>
     <body>
@@ -45,6 +45,6 @@
 		</div>
 	</body>
 	<script>
-		
+
 	</script>
 </html>
