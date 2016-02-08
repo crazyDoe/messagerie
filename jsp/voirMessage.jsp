@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%@ include file="../head.html"%>
+    <%@ include file="head.jsp"%>
+    <%@ page pageEncoding="utf-8" %>
     <meta charset="utf-8">
     <title>Messages</title>
   </head>
@@ -31,7 +32,7 @@
                 int compteur = 0;
                 while (rsA.next()){compteur++;}
                 rsA = stmt.executeQuery();
-                
+
                 if (rsA.next()) {
                   if(compteur == 1) { %>
                   <a class="lienUser" href=chat.jsp?group_name=<%=rsA.getString("pseudo")%> onclick="updateNotif();"/>
@@ -44,8 +45,8 @@
 
                           if(msg.length() < 50)
                             out.println(rs.getString("message"));
-                          else                   
-                            out.println(rs.getString("message").substring(0, 50)); 
+                          else
+                            out.println(rs.getString("message").substring(0, 50));
                           %> </p>
                     </div>
                   </a>
@@ -67,8 +68,8 @@
 
                             if(msg.length() < 50)
                               out.println(rs.getString("message"));
-                            else                    
-                              out.println(rs.getString("message").substring(0, 50)); 
+                            else
+                              out.println(rs.getString("message").substring(0, 50));
                             %> </p>
                          </div>
                        </a>

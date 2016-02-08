@@ -25,6 +25,7 @@ public class GetMessages extends HttpServlet{
 		ResultSet rs;
 		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
+		req.setCharacterEncoding("UTF-8");
 
 		try {
 			String pseudo = (String)session.getAttribute("pseudo");

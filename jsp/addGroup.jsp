@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%@ include file="../head.html" %>
-    <meta charset="UTF-8"/>
+    <%@ include file="head.jsp" %>
+    <%@ page pageEncoding="utf-8" %>
     <title>AddGroup - Quoi d'neuf</title>
   </head>
   <body>
     <%@ include file="header.jsp"%> <br />
-    <h2> Creation d'un Groupe </h2>
+    <h2> Création d'un Groupe </h2>
     <div class="row">
       <div class="col-md-8">
          <form action='../servlet/AddContact' method='get' role="form" >

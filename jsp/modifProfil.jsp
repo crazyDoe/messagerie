@@ -5,7 +5,8 @@
   <head>
     <meta charset="utf-8">
     <title> Home </title>
-    <%@ include file="../head.html"%>
+    <%@ include file="head.jsp"%>
+    <%@ page pageEncoding="utf-8" %>
   </head>
   <body>
     <% Object pseudo = session.getAttribute("pseudo"); %>
