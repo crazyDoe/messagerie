@@ -6,7 +6,7 @@ drop table if exists personne;
 
 create table personne(
 	pseudo text,
-	mdp text,
+	mdp char(128),
 	role text not null default 'default',
 
 	constraint pk_personne primary key(pseudo)
@@ -46,10 +46,3 @@ create table contient(
 	constraint fk_contient1 foreign key(id_groupe) references groupe(gno),
 	constraint fk_contient2 foreign key(pseudo) references personne(pseudo)
 );
-
-INSERT INTO personne(pseudo, mdp) VALUES ('biche','123456');
-INSERT INTO personne(pseudo, mdp) VALUES ('zepellin','123123');
-INSERT INTO personne(pseudo, mdp) VALUES ('admin','admin');
-INSERT INTO personne(pseudo, mdp) VALUES ('thor','jamesbond');
-INSERT INTO personne(pseudo, mdp) VALUES ('bryan','123456');
-INSERT INTO personne(pseudo, mdp) VALUES ('bob','marteau');
