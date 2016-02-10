@@ -57,3 +57,5 @@ INSERT INTO personne VALUES ('bob','f60b5146b1d43e0e1bd8e62ce732b3498c5d7d2cb249
 INSERT INTO personne VALUES ('gamingko','505b2e37c5890e12ef5fb861982a19107ad54ed4ee60d3119c37a955bfd48fb5','default'); /* gamingko - starwars59 */
 INSERT INTO personne VALUES ('biche','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','default'); /* biche - 123456 */
 INSERT INTO personne VALUES ('poney','03662a2852282880fe0e247ef90f42e0f8c1ccf0f7b4087ad5cbc4a14b6c206d','default'); /* poney - poney */
+INSERT INTO personne VALUES ('philippe','430005175c4c7810996d3481f0dbc3ec01103d6abcc5beec5db4b3f1eae35047','default'); /* philippe - mysql */
+INSERT INTO personne VALUES ('sebastien','21ce078705d04ca6324c1d0313fc08ea99f3cef6389a6744d40bd2d9d0cd7816','default'); /* sebastien - recursive */
