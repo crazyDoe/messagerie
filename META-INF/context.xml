@@ -8,6 +8,7 @@
    <Realm  
            className="org.apache.catalina.realm.DataSourceRealm" 
            debug="99"
+           digest="sha-256"
            dataSourceName="pool"
            localDataSource="true"
            userTable="personne" 
