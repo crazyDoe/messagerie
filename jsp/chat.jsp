@@ -17,7 +17,7 @@
       <div class="col-md-8 chatBox">
         <div class="chat-panel panel panel-default">
           <div class="panel-heading">
-            <i class="fa fa-comments fa-fw"></i> Discussion
+            <i class="fa fa-comments fa-fw"></i> Discussions éééé ççç
           </div>
           <div class="panel-body" id="boiteDialogue">
             <ul class="chat">
@@ -72,7 +72,7 @@
     	'use strict';
 
     	return text.replace(/[\"&<>]/g, function (a) {
-        	return { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;' }[a];
+        	return { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;', }[a];
     	});
 	}
 
