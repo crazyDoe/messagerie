@@ -14,7 +14,7 @@
     <div class="row" id="menu1">
       <div class="col-md-10">
         <h1> Modification du Profil </h1>
-        <form method="POST" action="servlet/UploadImage" enctype="multipart/form-data"  >
+        <form method="POST" action="../servlet/UploadImage" enctype="multipart/form-data"  >
           <div class="form-group">
             <%
               if (new File(request.getServletContext().getRealPath("/") +

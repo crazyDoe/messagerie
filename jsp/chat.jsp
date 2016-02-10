@@ -17,7 +17,7 @@
       <div class="col-md-8 chatBox">
         <div class="chat-panel panel panel-default">
           <div class="panel-heading">
-            <i class="fa fa-comments fa-fw"></i> Discussionéé
+            <i class="fa fa-comments fa-fw"></i> Discussion
           </div>
           <div class="panel-body" id="boiteDialogue">
             <ul class="chat">

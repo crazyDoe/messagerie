@@ -22,19 +22,19 @@ public class UploadImage extends HttpServlet{
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException{
 		final String path = req.getServletContext().getRealPath("/") + "img/" + req.getSession().getAttribute("pseudo") + "Avatar.png";
 		final Part filePart = req.getPart("file");
-	    
+
 	    OutputStream out = null;
 	    InputStream filecontent = null;
-	    
+
 	    out = new FileOutputStream(new File(path));
 	    filecontent = filePart.getInputStream();
-	    
+
 	    int read = 0;
 	    final byte[] bytes = new byte[1024];
 
 	    while ((read = filecontent.read(bytes)) != -1)
 	    	out.write(bytes, 0, read);
-	    
-	    res.sendRedirect("../profil.jsp");
+
+	    res.sendRedirect("../jsp/profil.jsp");
 	}
 }
