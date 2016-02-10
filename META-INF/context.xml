@@ -2,19 +2,19 @@
 <Context debug="99" path="/messagerie">
   <!-- Definition du pool -->
   <Resource auth="Container" driverClassName="org.sqlite.JDBC" maxActive="8" maxIdle="4" maxWait="10000" name="pool"  type="javax.sql.DataSource" url="jdbc:sqlite:../webapps/messagerie/bdd/messagerie.db" />
-  
+
   <!-- Definition du Realm via le pool -->
 
-   <Realm  
-           className="org.apache.catalina.realm.DataSourceRealm" 
+   <Realm
+           className="org.apache.catalina.realm.DataSourceRealm"
            debug="99"
            digest="sha-256"
            dataSourceName="pool"
            localDataSource="true"
-           userTable="personne" 
-           userNameCol="pseudo" 
+           userTable="personne"
+           userNameCol="pseudo"
            userCredCol="mdp"
-           userRoleTable="personne" 
+           userRoleTable="personne"
            roleNameCol="role"
     />
  </Context>

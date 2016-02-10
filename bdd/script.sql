@@ -6,7 +6,7 @@ drop table if exists personne;
 
 create table personne(
 	pseudo text,
-	mdp char(128),
+	mdp char(256),
 	role text not null default 'default',
 
 	constraint pk_personne primary key(pseudo)

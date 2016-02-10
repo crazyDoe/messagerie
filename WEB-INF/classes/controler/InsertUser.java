@@ -21,7 +21,7 @@ import model.BDDTools;
 public class InsertUser extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private MessageDigest digester;
-	
+
 	public String crypt(String str) throws NoSuchAlgorithmException {
 		digester = MessageDigest.getInstance("SHA-256");
 
@@ -36,7 +36,7 @@ public class InsertUser extends HttpServlet{
         }
         return hexString.toString();
     }
-	
+
 	public void service( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
 		BDDTools tools = new BDDTools(req,res);
 		Connection con = null;
@@ -58,7 +58,7 @@ public class InsertUser extends HttpServlet{
 				session.setAttribute("pseudo", nomSaisi);
 				stmt = con.prepareStatement("INSERT INTO personne(pseudo, mdp) VALUES (?,?)");
 				stmt.setString(1, nomSaisi);
-				stmt.setString(2, crypt("123"));
+				stmt.setString(2, crypt(mdp));
 				stmt.executeUpdate();
 				session.setAttribute("erreur",null);
 				res.sendRedirect(req.getContextPath() + "/jsp/profil.jsp");
@@ -81,7 +81,7 @@ public class InsertUser extends HttpServlet{
 			tools.close();
 		}
 	}
-	
+
 	public static void main(String[] args) throws NoSuchAlgorithmException {
 		System.out.println(new InsertUser().crypt("123"));
 	}
